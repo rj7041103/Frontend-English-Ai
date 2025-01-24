@@ -1,0 +1,17 @@
+<div class="flex mb-4">
+    @if(chatMessage().icon){
+    <span class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full text-blue-600 relative">
+        <img [src]="chatMessage().icon" alt="" class="object-contain">
+    </span>
+    }
+    <span class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full text-blue-600 relative mt-1 pl-3 ">
+        <fa-icon [icon]="faUser" class="dark:block dark:text-white w-[28px] h-[28px]"></fa-icon>
+    </span>
+    <div class="ml-3 max-w-[75%] sm:max-w-md">
+        <div class="bg-white pt-1 pl-2 pr-2 pb-2 sm:pl-3 sm:pr-3 sm:pb-3 rounded-lg shadow-sm">
+            <span class="text-xs text-blue-600">{{chatMessage().user_name}}</span>
+            <p class="text-sm sm:text-base text-gray-800">{{chatMessage().message}}</p>
+        </div>
+        <span class="text-xs text-gray-500 mt-1">{{chatMessage().time}}</span>
+    </div>
+</div>

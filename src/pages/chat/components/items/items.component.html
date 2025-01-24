@@ -1,0 +1,11 @@
+<a (click)="handleRoom()" class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+    @if(chatRoomItem().icon){
+    <span class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full text-blue-600 relative">
+        <img [src]="chatRoomItem().icon" alt="" class="object-contain">
+    </span>
+    }
+    <span class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full text-blue-600">
+        <fa-icon [icon]="faRocketchat" class="dark:block dark:text-white"></fa-icon>
+    </span>
+    <span class="ml-3 text-gray-700">{{chatRoomItem().user_name}}</span>
+</a>

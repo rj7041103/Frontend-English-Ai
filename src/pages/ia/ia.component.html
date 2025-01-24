@@ -1,0 +1,9 @@
+<select [(ngModel)]="selectedLanguage" (change)="updateLanguage()">
+    <option *ngFor="let lang of languages" [value]="lang.code">
+        {{ lang.name }}
+    </option>
+
+</select>
+<button (click)="toggleListening()">
+    {{ isListening ? 'Detener' : 'Hablar' }}
+</button>

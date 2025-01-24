@@ -1,0 +1,33 @@
+<div class="hidden md:block md:w-64 bg-white shadow-lg h-full overflow-auto ">
+    <div class="p-4 border-b">
+        <h2 class="text-xl font-semibold text-gray-800">Conversaciones</h2>
+    </div>
+    <div class="">
+        <div class="p-2">
+            <button
+                class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="fas fa-plus mr-2"></i>
+                Nuevo Chat
+            </button>
+        </div>
+        <div class="space-y-1 p-2">
+            @for(room of dataRooms; track room.user_name){
+            <app-items [chatRoomItem]="room" (roomName)="handleChatRoom($event)"></app-items>
+            }
+            <!-- <a href="https://example.com/chat/2"
+                class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                    <i class="fas fa-paint-brush"></i>
+                </span>
+                <span class="ml-3 text-gray-700">Diseño UI/UX</span>
+            </a>
+            <a href="https://example.com/chat/3"
+                class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                <span class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full text-purple-600">
+                    <i class="fas fa-mobile-alt"></i>
+                </span>
+                <span class="ml-3 text-gray-700">Desarrollo Móvil</span>
+            </a> -->
+        </div>
+    </div>
+</div>

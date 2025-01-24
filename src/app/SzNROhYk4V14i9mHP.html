@@ -1,0 +1,226 @@
+<html>
+
+<head>
+  <base href="https://example.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LearnEnglish - Aprende inglés de manera efectiva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script>
+    // Configuración del tema oscuro
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+          }
+        }
+      }
+    }
+
+    // Función para cambiar el tema
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+    }
+
+    // Verificar preferencia guardada
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('darkMode') === 'true' ||
+        window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+</head>
+
+<body class="bg-white dark:bg-gray-900 transition-colors duration-200">
+  <!-- Navbar -->
+  <nav class="fixed w-full bg-white dark:bg-gray-800 shadow-lg z-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-2">
+          <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z" />
+            <path d="M10 4a1 1 0 100 2 1 1 0 000-2z" />
+          </svg>
+          <span class="text-2xl font-bold text-gray-800 dark:text-white">LearnEnglish</span>
+        </div>
+
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="https://example.com/cursos"
+            class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors">Cursos</a>
+          <a href="https://example.com/practica"
+            class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors">Práctica</a>
+          <a href="https://example.com/recursos"
+            class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors">Recursos</a>
+          <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+          </button>
+          <a href="https://example.com/login"
+            class="px-6 py-2 rounded-full bg-primary text-white hover:bg-blue-600 transition-colors">Iniciar Sesión</a>
+        </div>
+
+        <button class="md:hidden text-gray-600 dark:text-gray-300">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-28 pb-20 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-10 md:mb-0">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+          Aprende inglés de manera <span class="text-primary">efectiva</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          Domina el inglés con nuestro método innovador. Clases en vivo, ejercicios interactivos y seguimiento
+          personalizado.
+        </p>
+        <div class="flex space-x-4">
+          <a href="https://example.com/registro"
+            class="px-8 py-3 rounded-full bg-primary text-white hover:bg-blue-600 transition-colors text-lg font-semibold">
+            Comenzar Gratis
+          </a>
+          <a href="https://example.com/demo"
+            class="px-8 py-3 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white dark:text-white transition-colors text-lg font-semibold">
+            Ver Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 relative">
+        <div class="bg-blue-100 dark:bg-blue-900/30 rounded-full h-96 w-96 absolute top-0 right-0 -z-10"></div>
+        <img src="/homeP.png" alt="Estudiantes aprendiendo inglés" class="relative z-10 rounded-lg shadow-xl">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+        ¿Por qué elegirnos?
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+          <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-video text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Clases en Vivo</h3>
+          <p class="text-gray-600 dark:text-gray-300">Interactúa con profesores nativos y otros estudiantes en tiempo
+            real.</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+          <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-users text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Grupos Reducidos</h3>
+          <p class="text-gray-600 dark:text-gray-300">Aprende en grupos pequeños para maximizar tu participación y
+            aprendizaje.</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg">
+          <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-chart-line text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Seguimiento Personalizado</h3>
+          <p class="text-gray-600 dark:text-gray-300">Monitorea tu progreso y recibe retroalimentación constante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+        ¿Listo para comenzar tu viaje hacia la fluidez en inglés?
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+        Únete a nuestra comunidad de más de 10,000 estudiantes satisfechos
+      </p>
+      <a href="https://example.com/registro"
+        class="px-8 py-3 rounded-full bg-primary text-white hover:bg-blue-600 transition-colors text-lg font-semibold inline-block">
+        Comienza tu prueba gratuita
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-50 dark:bg-gray-800 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z" />
+              <path d="M10 4a1 1 0 100 2 1 1 0 000-2z" />
+            </svg>
+            <span class="text-xl font-bold text-gray-800 dark:text-white">LearnEnglish</span>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300">
+            Transformando la manera de aprender inglés
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Productos</h4>
+          <ul class="space-y-2">
+            <li><a href="https://example.com/cursos"
+                class="text-gray-600 hover:text-primary dark:text-gray-300">Cursos</a></li>
+            <li><a href="https://example.com/practica"
+                class="text-gray-600 hover:text-primary dark:text-gray-300">Práctica</a></li>
+            <li><a href="https://example.com/recursos"
+                class="text-gray-600 hover:text-primary dark:text-gray-300">Recursos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Compañía</h4>
+          <ul class="space-y-2">
+            <li><a href="https://example.com/nosotros" class="text-gray-600 hover:text-primary dark:text-gray-300">Sobre
+                nosotros</a></li>
+            <li><a href="https://example.com/contacto"
+                class="text-gray-600 hover:text-primary dark:text-gray-300">Contacto</a></li>
+            <li><a href="https://example.com/blog" class="text-gray-600 hover:text-primary dark:text-gray-300">Blog</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Síguenos</h4>
+          <div class="flex space-x-4">
+            <a href="https://facebook.com" class="text-gray-600 hover:text-primary dark:text-gray-300">
+              <i class="fab fa-facebook text-2xl"></i>
+            </a>
+            <a href="https://twitter.com" class="text-gray-600 hover:text-primary dark:text-gray-300">
+              <i class="fab fa-twitter text-2xl"></i>
+            </a>
+            <a href="https://instagram.com" class="text-gray-600 hover:text-primary dark:text-gray-300">
+              <i class="fab fa-instagram text-2xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 dark:border-gray-700 mt-12 pt-8 text-center">
+        <p class="text-gray-600 dark:text-gray-300">
+          © 2024 LearnEnglish. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

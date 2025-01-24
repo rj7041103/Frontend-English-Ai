@@ -1,0 +1,131 @@
+<!-- Navbar -->
+<nav class="bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+                <svg class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span class="ml-2 text-xl font-semibold text-gray-800">AppModerna</span>
+            </div>
+
+            <!-- Menú de escritorio -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://example.com/inicio" class="text-gray-600 hover:text-indigo-600 transition">Inicio</a>
+                <a href="https://example.com/perfil" class="text-gray-600 hover:text-indigo-600 transition">Perfil</a>
+                <a href="https://example.com/configuracion"
+                    class="text-gray-600 hover:text-indigo-600 transition">Configuración</a>
+            </div>
+
+            <!-- Botón de menú móvil -->
+            <div class="md:hidden">
+                <button id="menuButton" class="text-gray-600 hover:text-indigo-600 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú móvil desplegable -->
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+            <a href="https://example.com/inicio"
+                class="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">Inicio</a>
+            <a href="https://example.com/perfil"
+                class="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">Perfil</a>
+            <a href="https://example.com/configuracion"
+                class="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">Configuración</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenido Principal -->
+<main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-12">Bienvenido a AppModerna</h1>
+
+    <!-- Grid de Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card Chat -->
+        <a class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-comments text-2xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Chat 💬</h2>
+                <p class="text-gray-600">Inicia una conversación privada con tus contactos</p>
+            </div>
+        </a>
+
+        <!-- Card Calendario -->
+        <a class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
+                    <i class="fas fa-calendar-alt text-2xl text-green-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Calendario 📅</h2>
+                <p class="text-gray-600">Organiza tus eventos y reuniones</p>
+            </div>
+        </a>
+
+        <!-- Card Tareas -->
+        <a class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-purple-100 rounded-full mb-4">
+                    <i class="fas fa-tasks text-2xl text-purple-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Tareas ✅</h2>
+                <p class="text-gray-600">Gestiona tus pendientes y proyectos</p>
+            </div>
+        </a>
+
+        <!-- Card Notas -->
+        <a class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-yellow-100 rounded-full mb-4">
+                    <i class="fas fa-sticky-note text-2xl text-yellow-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Notas 📝</h2>
+                <p class="text-gray-600">Toma notas rápidas y organizadas</p>
+            </div>
+        </a>
+
+        <!-- Card Archivos -->
+        <a class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
+                    <i class="fas fa-file-alt text-2xl text-blue-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Archivos 📁</h2>
+                <p class="text-gray-600">Administra y comparte tus archivos</p>
+            </div>
+        </a>
+
+        <!-- Card Configuración -->
+        <a class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-gray-100 rounded-full mb-4">
+                    <i class="fas fa-cog text-2xl text-gray-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Configuración ⚙️</h2>
+                <p class="text-gray-600">Personaliza tu experiencia</p>
+            </div>
+        </a>
+    </div>
+</main>
+
+<!-- Footer -->
+<!-- <footer class="bg-white mt-12 py-6 shadow-inner">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-600 text-sm">© 2024 AppModerna. Todos los derechos reservados.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a class="text-gray-600 hover:text-indigo-600 text-sm">Términos</a>
+                <a class="text-gray-600 hover:text-indigo-600 text-sm">Privacidad</a>
+                <a class="text-gray-600 hover:text-indigo-600 text-sm">Contacto</a>
+            </div>
+        </div>
+    </div>
+</footer> -->

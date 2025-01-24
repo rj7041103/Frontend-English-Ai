@@ -1,0 +1,8 @@
+<select class="w-[60px] h-[30px] rounded-full pl-3 pr-3 pt-1 pb-2 outline-none" [(ngModel)]="selectedLanguage"
+    (change)="updateLanguage()">
+    @for(opt of languages; track opt.code){
+    <option [value]="opt.code">
+        <img src="../../../assets/images/FlagEn.png" alt="Flag" class="w-6 h-6"> {{opt.code}}
+    </option>
+    }
+</select>

@@ -1,0 +1,144 @@
+<div class="flex h-screen relative">
+    <!-- Sidebar - ahora con clases responsive -->
+    <!-- <div class="hidden md:block md:w-64 bg-white shadow-lg">
+        <div class="p-4 border-b">
+            <h2 class="text-xl font-semibold text-gray-800">Conversaciones</h2>
+        </div>
+        <div class="overflow-y-auto h-full">
+            <div class="p-2">
+                <button
+                    class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-plus mr-2"></i>
+                    Nuevo Chat
+                </button>
+            </div>
+            <div class="space-y-1 p-2">
+                <a class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <span class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full text-blue-600">
+                        <i class="fas fa-code"></i>
+                    </span>
+                    <span class="ml-3 text-gray-700">Desarrollo Web</span>
+                </a>
+                <a class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <span class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                        <i class="fas fa-paint-brush"></i>
+                    </span>
+                    <span class="ml-3 text-gray-700">Diseño UI/UX</span>
+                </a>
+                <a class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <span class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full text-purple-600">
+                        <i class="fas fa-mobile-alt"></i>
+                    </span>
+                    <span class="ml-3 text-gray-700">Desarrollo Móvil</span>
+                </a>
+            </div>
+        </div>
+    </div>
+ -->
+    <app-sidebar />
+
+
+
+    <!-- Chat principal -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header del chat -->
+        <div class="bg-white shadow-sm p-4 flex items-center justify-around relative">
+            <!-- Botón menú móvil -->
+            <button id="mobileMenuBtn"
+                class="md:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2 pl-3 pr-3 rounded-xl">
+                <fa-icon [icon]="faBars" class="dark:block dark:text-white text-xl sm:text-xl"></fa-icon>
+            </button>
+            <div class="flex items-center">
+                <span class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full text-blue-600">
+                    <fa-icon [icon]="faCode" class="dark:block dark:text-white text-lg sm:text-xl"></fa-icon>
+                </span>
+                <h3 class="ml-3 text-lg font-semibold text-gray-800">Desarrollo Web</h3>
+            </div>
+        </div>
+
+        <!-- Área de mensajes -->
+        <div class="flex-1 overflow-y-auto p-4 bg-gray-50 chat-height">
+            <!-- Mensaje recibido -->
+            @for(mensaje of mensajesPrueba(); track mensaje){
+            <app-messages [chatMessage]="mensaje" />
+
+            }
+
+            <!-- Mensaje enviado -->
+            <!-- <div class="flex mb-4 justify-end">
+                <div class="max-w-[75%] sm:max-w-md">
+                    <div class="bg-blue-600 p-2 sm:p-3 rounded-lg shadow-sm">
+                        <p class="text-sm sm:text-base text-white">¡Sí! Es genial para desarrollo rápido.</p>
+                    </div>
+                    <span class="text-xs text-gray-500 mt-1 block text-right">10:32 AM</span>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Área de input -->
+        <div class="bg-white p-2 sm:p-4 shadow-lg message-input">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex items-center space-x-2">
+                <button
+                    class="p-1 sm:p-2 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors">
+                    <fa-icon [icon]="faPaperclip" class="dark:block dark:text-white text-lg sm:text-xl"></fa-icon>
+                </button>
+                <input #input formControlName="message" type="text" placeholder="Escribe un mensaje..."
+                    class="flex-1 p-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                <!-- <button
+                    class="p-1 sm:p-2 text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors">
+                    <fa-icon [icon]="faMicrophone" class="dark:block dark:text-white text-lg sm:text-xl"></fa-icon>
+                </button> -->
+                <button type="submit" class="p-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                    <fa-icon [icon]="faPaperPlane" class="dark:block dark:text-white text-lg sm:text-xl"></fa-icon>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Menú móvil overlay -->
+<div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden">
+    <div class="w-64 h-full bg-white shadow-lg">
+        <!-- Contenido del sidebar móvil -->
+        <div class="p-4 border-b flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-800">Conversaciones</h2>
+            <button id="closeMobileMenu" class="text-gray-500">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="overflow-y-auto h-full">
+            <!-- Mismo contenido que el sidebar original -->
+            <div class="p-2">
+                <button
+                    class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-plus mr-2"></i>
+                    Nuevo Chat
+                </button>
+            </div>
+            <div class="space-y-1 p-2">
+                <!-- Mismos enlaces que arriba -->
+                <a href="https://example.com/chat/1"
+                    class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <span class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full text-blue-600">
+                        <i class="fas fa-code"></i>
+                    </span>
+                    <span class="ml-3 text-gray-700">Desarrollo Web</span>
+                </a>
+                <a href="https://example.com/chat/2"
+                    class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <span class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                        <i class="fas fa-paint-brush"></i>
+                    </span>
+                    <span class="ml-3 text-gray-700">Diseño UI/UX</span>
+                </a>
+                <a href="https://example.com/chat/3"
+                    class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">
+                    <span class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full text-purple-600">
+                        <i class="fas fa-mobile-alt"></i>
+                    </span>
+                    <span class="ml-3 text-gray-700">Desarrollo Móvil</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
