@@ -1,38 +1,50 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  output,
+  signal,
+} from '@angular/core';
 import { ItemsComponent } from '../items/items.component';
 import { ChatRoomItem } from '../../models/chat.models';
-import { BehaviorSubject } from 'rxjs';
-import { StateService } from '../../../../storage/state.service';
 import { ChatService } from '../../service/chat.service';
+import { AppStore } from '../../../../store/store';
+import { CreateFormRoomComponent } from '../create-form-room/create-form-room.component';
 @Component({
   selector: 'app-sidebar',
-  imports: [ItemsComponent],
+  imports: [ItemsComponent, CreateFormRoomComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
+  // State's rooms
   rooms = signal<{ before: string; next: string }>({ before: '', next: '' });
-  stateService = inject(StateService);
+  //services
   chatService = inject(ChatService);
+  readonly store = inject(AppStore);
+  //Create new Room
+  newRoom = output<boolean>();
+  /* newRoomEvent = output<boolean>(); */
   //test data
   dataRooms: ChatRoomItem[] = [
     {
-      user_name: 'Ts',
+      room_name: 'Ts',
     },
     {
-      user_name: 'Js',
+      room_name: 'Js',
     },
     {
-      user_name: 'Ja',
+      room_name: 'Ja',
     },
     {
-      user_name: 'C#',
+      room_name: 'C#',
     },
     {
-      user_name: 'C++',
+      room_name: 'C++',
     },
     {
-      user_name: 'Py',
+      room_name: 'Py',
     },
   ];
   handleChatRoom(roomName: string) {
@@ -46,11 +58,14 @@ export class SidebarComponent {
       };
     });
 
-    this.stateService.setRoom(roomName);
-
     //we leave the previous room
     if (this.rooms().before !== '') {
       this.chatService.leaveRoom(this.rooms().before);
     }
+    this.store.setRoom(roomName);
+  }
+
+  createNewRoom() {
+    this.newRoom.emit(true);
   }
 }

@@ -1,4 +1,10 @@
-import { Component, computed, HostBinding, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  HostBinding,
+  inject,
+  signal,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons';
 import { SelectTranslationComponent } from '../../shared/components/select-translation/select-translation.component';
@@ -9,6 +15,7 @@ import {
   faInstagram,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+import { AuthService } from '../Auth/service/auth.service';
 @Component({
   selector: 'app-home',
   imports: [
@@ -33,8 +40,9 @@ export class HomeComponent {
   private darkMode = signal<boolean>(false);
   protected readonly darkMode$ = computed(() => this.darkMode());
   flag_url: string = '../../assets/images/FlagEs.png';
-  //Inject languages service
-  //translateService = inject(TranslateCustomService);
+
+  //services
+  authService = inject(AuthService);
 
   constructor(public translate: TranslateService) {
     this.translate.addLangs(['en', 'es']);
@@ -57,5 +65,13 @@ export class HomeComponent {
     lang === 'en'
       ? (this.flag_url = `../../assets/images/FlagEn.png`)
       : (this.flag_url = `../../assets/images/FlagEs.png`);
+  }
+
+  isLogged() {
+    return localStorage.getItem('token') ? true : false;
+  }
+
+  signout() {
+    this.authService.signOut();
   }
 }

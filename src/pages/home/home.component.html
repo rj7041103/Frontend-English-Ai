@@ -27,9 +27,17 @@
 
                     }
                 </button>
+                @if(!isLogged()){
                 <a [routerLink]="['/login']"
                     class="px-6 py-2 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors">{{'loginButton'
                     | translate }}</a>
+                }
+                @else{
+                <a (click)="signout()"
+                    class="px-6 py-2 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors">{{'logoutButton'
+                    | translate }}</a>
+                }
+
                 <app-select-translation (changeFlagEvent)="changeFlag($event)" />
                 <img [src]="flag_url" alt="" class="w-7 h-7">
 

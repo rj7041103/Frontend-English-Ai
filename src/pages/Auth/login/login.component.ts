@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { AppStore } from '../../../store/store';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink, FontAwesomeModule],
@@ -17,9 +18,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent {
   form: FormGroup;
+  //services
   authService = inject(AuthService);
+  //routes
   router = inject(Router);
-
+  //store
+  readonly store = inject(AppStore);
   //accesories
   faArrowLeft = faArrowLeft;
   constructor(private fb: FormBuilder) {

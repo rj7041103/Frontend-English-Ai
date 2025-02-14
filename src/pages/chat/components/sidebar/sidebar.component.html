@@ -4,14 +4,14 @@
     </div>
     <div class="">
         <div class="p-2">
-            <button
+            <button (click)="createNewRoom()"
                 class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                 <i class="fas fa-plus mr-2"></i>
                 Nuevo Chat
             </button>
         </div>
         <div class="space-y-1 p-2">
-            @for(room of dataRooms; track room.user_name){
+            @for(room of dataRooms; track room.room_name){
             <app-items [chatRoomItem]="room" (roomName)="handleChatRoom($event)"></app-items>
             }
             <!-- <a href="https://example.com/chat/2"
@@ -30,4 +30,5 @@
             </a> -->
         </div>
     </div>
+
 </div>

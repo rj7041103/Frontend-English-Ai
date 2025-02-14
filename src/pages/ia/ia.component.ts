@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IaService } from '../../shared/ia/ia.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 declare var SpeechRecognition: any;

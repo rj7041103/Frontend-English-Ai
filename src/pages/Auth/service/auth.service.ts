@@ -1,28 +1,20 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { StateService } from '../../../storage/state.service';
-
-interface Login {
-  email: string;
-  password: string;
-}
-
-interface Register extends Login {
-  name: string;
-}
+import { AppStore } from '../../../store/store';
+import { Login, Register } from '../models/auth.model';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  //urls
   private apiUrlRegister = environment.apiRegister; // Reemplaza con la URL de tu backend
   private apiUrlLogin = environment.apiLogin;
-  token = signal('');
-  stateService = inject(StateService);
+  //store
+  readonly store = inject(AppStore);
   constructor(private http: HttpClient) {}
 
-  postDataRegister(data: Register): Observable<Register> {
+  postDataRegister(data: Register) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -30,13 +22,11 @@ export class AuthService {
       headers,
     });
     registerSuccess.subscribe((res) => {
-      this.token.set(res.token);
-      this.stateService.setAccessToken(res.token);
+      localStorage.setItem('token', res.access_token);
     });
-    return registerSuccess;
   }
 
-  postDataLogin(data: Login): Observable<Login> {
+  postDataLogin(data: Login) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -44,9 +34,11 @@ export class AuthService {
       headers,
     });
     loginSuccess.subscribe((res) => {
-      this.token.update((value) => (value = res.token));
-      this.stateService.setAccessToken(res.token);
+      localStorage.setItem('token', res.access_token);
     });
-    return loginSuccess;
+  }
+
+  signOut() {
+    localStorage.removeItem('token');
   }
 }

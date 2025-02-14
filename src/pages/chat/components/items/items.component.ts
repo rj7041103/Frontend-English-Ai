@@ -18,7 +18,7 @@ export class ItemsComponent {
   roomName = output<string>();
   //we join a selected room and broadcast the room name
   handleRoom = () => {
-    this.chatService.joinRoom(this.chatRoomItem().user_name);
-    this.roomName.emit(this.chatRoomItem().user_name);
+    this.chatService.joinRoom(this.chatRoomItem().room_name);
+    this.roomName.emit(this.chatRoomItem().room_name);
   };
 }

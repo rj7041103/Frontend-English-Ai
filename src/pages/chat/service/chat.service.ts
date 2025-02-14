@@ -10,7 +10,7 @@ export class ChatService {
   _chat$ = new BehaviorSubject<Message[]>([]);
   public chat$ = this._chat$.asObservable();
   constructor(private socket: Socket) {
-    this.getMessage();
+    this.updateMessage();
   }
   sendMessage(message: string) {
     console.log(message);
@@ -19,7 +19,7 @@ export class ChatService {
 
   //Send a Message to a specific room
   sendMessageRoom(roomObject: Message) {
-    console.log(roomObject);
+    console.log('roomObject:', roomObject);
     this.socket.emit('event_message', roomObject);
   }
 
@@ -32,7 +32,8 @@ export class ChatService {
     this.socket.emit('leaveRoom', roomName);
   }
 
-  getMessage() {
+  updateMessage() {
+    //Actualizamos el BehaviorSubject
     this.socket.fromEvent('new_message').subscribe((data: any) => {
       const current = this._chat$.getValue();
       if (!current.includes(data)) {

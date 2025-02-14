@@ -22,8 +22,12 @@ import {
   faBars,
   faCode,
 } from '@fortawesome/free-solid-svg-icons';
-import { Message, Room } from './models/chat.models';
-import { StateService } from '../../storage/state.service';
+import { Message } from './models/chat.models';
+import { AppStore } from '../../store/store';
+import { formatAMPM } from '../../utils/dateFormat';
+import { chatgpt } from '../../store/chatgpt';
+import { CreateFormRoomComponent } from './components/create-form-room/create-form-room.component';
+
 @Component({
   selector: 'app-chat',
   imports: [
@@ -31,39 +35,21 @@ import { StateService } from '../../storage/state.service';
     MessagesComponent,
     ReactiveFormsModule,
     FontAwesomeModule,
+    CreateFormRoomComponent,
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css',
 })
 export class ChatComponent {
-  mensajesPrueba = signal<Message[]>([
-    {
-      user_name: 'Raul',
-      message: 'hola mundo como estan todos',
-      room: 'Ts',
-      time: '10:30 AM',
-    },
-    {
-      user_name: 'Ale',
-      message: 'hola como estas?',
-      room: 'Ts',
-      time: '10:30 AM',
-    },
-    {
-      user_name: 'Maria',
-      message: 'Hay tarea para hoy?',
-      room: 'Ts',
-      time: '10:30 AM',
-    },
-  ]);
-
-  //services
+  //service
   chatService = inject(ChatService);
-  stateService = inject(StateService);
-  //Form variable and viewChild of the chat input field
+  readonly store = inject(AppStore);
+  //Form chat variable and viewChild of the chat input field
   input = viewChild<ElementRef<HTMLInputElement>>('input');
   form: FormGroup;
 
+  //Create new Room
+  newRoom = signal<boolean>(false);
   //iconos del chat
   faPaperclip = faPaperclip;
   faPaperPlane = faPaperPlane;
@@ -77,43 +63,24 @@ export class ChatComponent {
       message: ['', [Validators.required]],
     });
   }
+  //function to create a new room
+  createRoom(event: boolean) {
+    event === true ? this.newRoom.set(true) : this.newRoom.set(false);
+  }
   onSubmit() {
     const currentTime = new Date();
-    const formattedTime = this.formatAMPM(currentTime);
-
-    /* const messageContent = {
-      name: 'Jesus',
-      message: this.form.value.message,
-      time: formattedTime,
-    }; */
+    const formattedTime = formatAMPM(currentTime);
     const roomObject: Message = {
       user_name: 'Jesus',
-      room: this.stateService.room(),
+      //room: this.stateService.room(),
+      room: this.store.room(),
       message: this.form.value.message,
       time: formattedTime,
     };
-    this.chatService.sendMessageRoom(roomObject);
-    this.getMessage();
+    //Actualizacion del chat
+    this.store.updateChat(roomObject, this.chatService);
+    //Reinicio de los valores del formulario
     this.form.value.message = '';
     this.input()!.nativeElement.value = '';
-  }
-
-  private formatAMPM(date: Date): string {
-    let hours: number | string = date.getHours();
-    const minutes: number | string = date.getMinutes();
-    const ampm: string = hours >= 12 ? 'PM' : 'AM';
-
-    hours = hours % 12; // Convierte a formato 12 horas
-    hours = hours ? hours : 12; // La hora '0' debe ser '12'
-
-    const strMinutes: number | string = minutes < 10 ? '0' + minutes : minutes; // Agrega un cero si es necesario
-
-    return `${hours}:${strMinutes} ${ampm}`; // Retorna el tiempo formateado
-  }
-  getMessage() {
-    this.chatService.chat$.subscribe((data) => {
-      console.log('get: ', data, typeof data);
-      this.mensajesPrueba.set(data);
-    });
   }
 }
