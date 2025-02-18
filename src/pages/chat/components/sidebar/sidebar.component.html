@@ -12,7 +12,7 @@
         </div>
         <div class="space-y-1 p-2">
             @for(room of dataRooms; track room.room_name){
-            <app-items [chatRoomItem]="room" (roomName)="handleChatRoom($event)"></app-items>
+            <app-items [chatRoomItem]="room"></app-items>
             }
             <!-- <a href="https://example.com/chat/2"
                 class="flex items-center p-3 hover:bg-gray-100 rounded-lg transition-colors">

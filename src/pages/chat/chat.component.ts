@@ -25,8 +25,8 @@ import {
 import { Message } from './models/chat.models';
 import { AppStore } from '../../store/store';
 import { formatAMPM } from '../../utils/dateFormat';
-import { chatgpt } from '../../store/chatgpt';
 import { CreateFormRoomComponent } from './components/create-form-room/create-form-room.component';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -48,7 +48,7 @@ export class ChatComponent {
   input = viewChild<ElementRef<HTMLInputElement>>('input');
   form: FormGroup;
 
-  //Create new Room
+  //Room's part
   newRoom = signal<boolean>(false);
   //iconos del chat
   faPaperclip = faPaperclip;
@@ -62,6 +62,9 @@ export class ChatComponent {
     this.form = this.fb.group({
       message: ['', [Validators.required]],
     });
+
+    //Check if there is a room
+    this.isThereaRoom();
   }
   //function to create a new room
   createRoom(event: boolean) {
@@ -70,10 +73,10 @@ export class ChatComponent {
   onSubmit() {
     const currentTime = new Date();
     const formattedTime = formatAMPM(currentTime);
+    const user_info = this.store.getUser();
     const roomObject: Message = {
-      user_name: 'Jesus',
-      //room: this.stateService.room(),
-      room: this.store.room(),
+      user_name: user_info?.user_name ?? 'Anonymous',
+      room: this.store.room()!.room_name,
       message: this.form.value.message,
       time: formattedTime,
     };
@@ -82,5 +85,17 @@ export class ChatComponent {
     //Reinicio de los valores del formulario
     this.form.value.message = '';
     this.input()!.nativeElement.value = '';
+  }
+
+  roomCreated(event: boolean) {
+    if (event === true) {
+      this.newRoom.set(false);
+    }
+  }
+
+  isThereaRoom() {
+    if (this.store.room() === null) {
+      this.newRoom.set(true);
+    }
   }
 }

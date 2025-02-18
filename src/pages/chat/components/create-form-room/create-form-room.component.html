@@ -1,6 +1,6 @@
 <div class="min-h-screen w-screen absolute bg-gray-900 flex items-center justify-center p-4">
     <div class="w-full max-w-md">
-        <form id="chatRoomForm"
+        <form id="chatRoomForm" [formGroup]="form" (ngSubmit)="onSubmit()"
             class="bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-gray-700/30">
             <h1
                 class="text-3xl font-semibold text-center mb-10 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
@@ -24,7 +24,8 @@
                             </div>
                             <span class="text-gray-400 font-medium">Seleccionar imagen</span>
                         </div>
-                        <input type="file" id="roomImage" class="hidden" accept="image/*" required>
+                        <input formControlName="icon" type="file" id="roomImage" class="hidden" accept="image/*"
+                            required>
                     </label>
                     <div id="imagePreview"
                         class="hidden mt-4 w-full h-48 rounded-xl overflow-hidden border border-gray-700">
@@ -34,7 +35,7 @@
 
                 <!-- Room Name Input -->
                 <div class="relative">
-                    <input type="text" id="roomName" required
+                    <input formControlName="room_name" type="text" id="roomName" required
                         class="w-full bg-transparent border-b-2 border-gray-700 px-0 py-4 text-white placeholder-transparent focus:border-primary focus:outline-none peer transition-colors duration-300"
                         placeholder="Nombre de la sala">
                     <label for="roomName"

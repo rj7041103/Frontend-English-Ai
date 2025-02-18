@@ -22,7 +22,7 @@ export const routes: Routes = [
       import('../pages/home/home.component').then((c) => c.HomeComponent),
   },
   {
-    path: 'ia',
+    path: 'session',
     loadComponent: () =>
       import('../pages/ia/ia.component').then((c) => c.IAComponent),
   },

@@ -4,8 +4,10 @@
         <img [src]="chatRoomItem().icon" alt="" class="object-contain">
     </span>
     }
+    @else{
     <span class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full text-blue-600">
         <fa-icon [icon]="faRocketchat" class="dark:block dark:text-white"></fa-icon>
     </span>
+    }
     <span class="ml-3 text-gray-700">{{chatRoomItem().room_name}}</span>
 </a>

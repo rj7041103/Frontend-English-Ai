@@ -1,10 +1,11 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRocketchat } from '@fortawesome/free-brands-svg-icons';
 import { ChatRoomItem, Room } from '../../models/chat.models';
 import { input } from '@angular/core';
 import { ChatService } from '../../service/chat.service';
+import { AppStore } from '../../../../store/store';
 @Component({
   selector: 'app-items',
   imports: [FontAwesomeModule, RouterLink],
@@ -12,13 +13,15 @@ import { ChatService } from '../../service/chat.service';
   styleUrl: './items.component.css',
 })
 export class ItemsComponent {
+  //Icons
   faRocketchat = faRocketchat;
+
+  //Input binding
   chatRoomItem = input.required<ChatRoomItem>();
+  //services
   chatService = inject(ChatService);
-  roomName = output<string>();
-  //we join a selected room and broadcast the room name
+
   handleRoom = () => {
-    this.chatService.joinRoom(this.chatRoomItem().room_name);
-    this.roomName.emit(this.chatRoomItem().room_name);
+    this.chatService.handleChatRoom(this.chatRoomItem());
   };
 }

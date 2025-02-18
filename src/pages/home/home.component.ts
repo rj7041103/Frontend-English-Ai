@@ -16,6 +16,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { AuthService } from '../Auth/service/auth.service';
+import { TranslateCustomService } from '../../shared/translate/translateCustom.service';
 @Component({
   selector: 'app-home',
   imports: [
@@ -39,19 +40,16 @@ export class HomeComponent {
   //section for darkMode
   private darkMode = signal<boolean>(false);
   protected readonly darkMode$ = computed(() => this.darkMode());
+
+  //Assets for the page
   flag_url: string = '../../assets/images/FlagEs.png';
 
   //services
   authService = inject(AuthService);
+  translateCustomService = inject(TranslateCustomService);
 
   constructor(public translate: TranslateService) {
-    this.translate.addLangs(['en', 'es']);
-    const lang = this.translate.getBrowserLang();
-    if (lang !== 'en' && lang !== 'es') {
-      this.translate.setDefaultLang('en');
-    } else {
-      this.translate.use(lang);
-    }
+    this.translateCustomService.initLang(translate);
   }
   @HostBinding('class.dark') get mode() {
     return this.darkMode();

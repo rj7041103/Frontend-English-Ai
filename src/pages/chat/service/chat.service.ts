@@ -1,12 +1,17 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { BehaviorSubject } from 'rxjs';
-import { Message, Room } from '../models/chat.models';
+import { ChatRoomItem, Message, Room } from '../models/chat.models';
+import { AppStore } from '../../../store/store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
+  // State's rooms
+  rooms = signal<{ before: string; next: string }>({ before: '', next: '' });
+  //store
+  readonly store = inject(AppStore);
   _chat$ = new BehaviorSubject<Message[]>([]);
   public chat$ = this._chat$.asObservable();
   constructor(private socket: Socket) {
@@ -41,5 +46,24 @@ export class ChatService {
         this._chat$.next(state);
       }
     });
+  }
+  handleChatRoom(roomObject: ChatRoomItem) {
+    //we join a room
+    this.joinRoom(roomObject.room_name)
+    //we clean the array of messages that we may have when changing rooms
+    this._chat$.next([]);
+    //we change the state of the room
+    this.rooms.update((oldData) => {
+      return {
+        before: oldData.next,
+        next: roomObject.room_name,
+      };
+    });
+
+    //we leave the previous room
+    if (this.rooms().before !== '') {
+      this.leaveRoom(this.rooms().before);
+    }
+    this.store.setRoom(roomObject);
   }
 }

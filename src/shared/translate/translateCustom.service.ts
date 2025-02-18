@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Observable, shareReplay } from 'rxjs';
-import { makeStateKey, TransferState } from '@angular/core';
+import { makeStateKey } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { inject } from '@angular/core';
 export const TRANSLATE_KEY = makeStateKey<object>('translate');
@@ -16,7 +16,6 @@ export function createTranslateLoader(http: HttpClient) {
 })
 export class TranslateCustomService {
   private readonly document = inject(DOCUMENT);
-  private readonly transferState = inject(TransferState);
   defaultLanguage = 'es';
 
   constructor(public translate: TranslateService) {}
@@ -29,5 +28,15 @@ export class TranslateCustomService {
     return this.translate
       .get(key)
       .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+  }
+
+  initLang(translate: TranslateService) {
+    translate.addLangs(['en', 'es']);
+    const lang = this.translate.getBrowserLang();
+    if (lang !== 'en' && lang !== 'es') {
+      this.translate.setDefaultLang('en');
+    } else {
+      this.translate.use(lang);
+    }
   }
 }
