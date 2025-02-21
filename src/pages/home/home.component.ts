@@ -1,9 +1,11 @@
 import {
   Component,
   computed,
+  ElementRef,
   HostBinding,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -48,8 +50,19 @@ export class HomeComponent {
   authService = inject(AuthService);
   translateCustomService = inject(TranslateCustomService);
 
+  //HMTL Elements
+  container_carousel =
+    viewChild<ElementRef<HTMLDivElement>>('carouselContainer');
+
+  //Variables
+  wasMenuOpen = signal<boolean>(false);
+
   constructor(public translate: TranslateService) {
     this.translateCustomService.initLang(translate);
+  }
+
+  ngAfterViewInit() {
+    this.initializeCarousel();
   }
   @HostBinding('class.dark') get mode() {
     return this.darkMode();
@@ -71,5 +84,31 @@ export class HomeComponent {
 
   signout() {
     this.authService.signOut();
+  }
+
+  toggleMenu() {
+    this.wasMenuOpen.set(!this.wasMenuOpen());
+  }
+
+  private initializeCarousel() {
+    const slides = this.container_carousel()?.nativeElement.children;
+    if (!slides || slides.length === 0) return;
+
+    let current = 0;
+
+    // Activar primera slide
+    slides[current].classList.add('active');
+
+    const nextSlide = () => {
+      slides[current].classList.remove('active');
+      slides[current].classList.add('prev');
+
+      current = (current + 1) % slides.length;
+
+      slides[current].classList.add('active');
+      setTimeout(() => slides[current].classList.remove('prev'), 10);
+    };
+
+    setInterval(nextSlide, 2000);
   }
 }
