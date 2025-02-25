@@ -11,11 +11,12 @@ import { Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
+
 @Component({
   selector: 'app-ia',
   imports: [FormsModule, CommonModule],
   templateUrl: './ia.component.html',
-  styleUrl: './ia.component.css',
+  styleUrls: ['./ia.component.css'], // Corregido a styleUrls
 })
 export class IAComponent {
   private recognition: any;
@@ -53,13 +54,14 @@ export class IAComponent {
     effect(() => {
       if (this.isListening()) {
         this.button()!.nativeElement.textContent = 'Detener';
-        //this.initSpeech();
         this.startAnimation();
       } else {
         this.stopAnimation();
+        this.button()!.nativeElement.textContent = 'Hablar';
       }
     });
   }
+
   private startAnimation() {
     // Animación de la esfera
     this.animationTimeline = gsap
@@ -170,12 +172,14 @@ export class IAComponent {
       this.soundWaves.push(tween);
     }
   }
+
   private async initSpeech() {
     await this.chatGptService.initModel();
     await this.setupAudioRecorder();
     this.setupChannel();
     await this.chatGptService.chatGPTResponse(this.pc);
   }
+
   async setupAudioRecorder() {
     this.pc.ontrack = (e) =>
       (this.audioEl()!.nativeElement.srcObject = e.streams[0]);
@@ -185,6 +189,7 @@ export class IAComponent {
     });
     this.pc.addTrack(ms.getTracks()[0]);
   }
+
   // Set up data channel for sending and receiving events
   setupChannel() {
     const dc = this.pc.createDataChannel('oai-events');
@@ -192,6 +197,7 @@ export class IAComponent {
       console.log(e);
     });
   }
+
   updateLanguage(): void {
     if (this.recognition) {
       this.recognition.lang = this.selectedLanguage;
@@ -199,8 +205,25 @@ export class IAComponent {
   }
 
   async toggleListening() {
-    this.isListening.set(!this.isListening());
+    if (this.isListening()) {
+      // Detener la función de habla
+      this.stopListening();
+    } else {
+      // Iniciar la función de habla
+      this.startListening();
+    }
+  }
+
+  private async startListening() {
+    this.isListening.set(true);
     await this.initSpeech();
+  }
+
+  private async stopListening() {
+    this.isListening.set(false);
+    // Cerrar la conexión WebRTC
+    this.pc.close();
+    this.pc = new RTCPeerConnection();
   }
 
   ngOnDestroy(): void {
@@ -213,5 +236,7 @@ export class IAComponent {
     if (this.synthesis) {
       this.synthesis.cancel();
     }
+    // Cerrar la conexión WebRTC al destruir el componente
+    this.pc.close();
   }
 }

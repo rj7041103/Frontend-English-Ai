@@ -1,0 +1,99 @@
+/* Estilos adicionales para un look futurista */
+#container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: #333;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .bg-blue-100 {
+    background-color: rgba(191, 219, 254, 0.5); /* Un azul más suave */
+  }
+  
+  .bg-blue-500 {
+    background-color: #3b82f6;
+  }
+  
+  .hover\:bg-blue-700:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Estilo para las opciones seleccionadas */
+  .option-selected {
+    border: 2px solid #4caf50 !important; /* Borde verde */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); /* Sombra verde sutil */
+  }
+  
+  .option-selected::after {
+    content: '✓'; /* Símbolo de check */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #4caf50;
+    font-size: 1.25rem;
+  }
+  
+  /* Estilo para la barra de progreso */
+  .bg-blue-600 {
+    background-color: #2563eb;
+  }
+  
+  /* Transition effect */
+  .fade-out {
+    animation: fadeOut 0.5s ease-in-out forwards; /* Adjust duration and easing */
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateX(0); /* Start at original position */
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-50px); /* Move to the left slightly */
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards; /* Adjust duration and easing */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(50px); /* Start from the right */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0); /* Move to original position */
+    }
+  }
+  
+  /* Animación de finalización */
+  #completion-screen {
+    animation: scaleUp 0.5s ease-in-out;
+  }
+  
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }

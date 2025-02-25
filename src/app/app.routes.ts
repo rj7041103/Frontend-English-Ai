@@ -40,4 +40,12 @@ export const routes: Routes = [
       import('../pages/chat/chat.component').then((c) => c.ChatComponent),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'practices',
+    loadComponent: () =>
+      import('../pages/practices/practices.component').then(
+        (c) => c.PracticesComponent
+      ),
+    canActivate: [AuthGuard],
+  },
 ];
