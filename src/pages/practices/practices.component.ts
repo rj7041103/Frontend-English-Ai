@@ -1,5 +1,8 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import confetti from 'canvas-confetti';
+import { PracticesService } from './service/practices.service';
+import { Observable } from 'rxjs';
+import { PracticeTest } from './models/practices.model';
 
 @Component({
   selector: 'app-practices',
@@ -22,31 +25,12 @@ export class PracticesComponent {
   currentQuestionIndex = 0;
   selectedOption: HTMLDivElement | null = null;
 
-  //data entry
-  questions = [
-    {
-      question: '¿Cuál es la capital de Francia?',
-      options: ['Berlín', 'Madrid', 'París', 'Roma'],
-      correctAnswer: 'París',
-    },
-    {
-      question: '¿Cuál es el río más largo del mundo?',
-      options: ['Nilo', 'Amazonas', 'Yangtsé', 'Misisipi'],
-      correctAnswer: 'Amazonas',
-    },
-    {
-      question: '¿Cuál es el planeta más grande del sistema solar?',
-      options: ['Marte', 'Júpiter', 'Venus', 'Saturno'],
-      correctAnswer: 'Júpiter',
-    },
-    {
-      question: '¿Cuál es el color de una manzana?',
-      options: ['rojo', 'azul', 'verde', 'amarillo'],
-      correctAnswer: 'rojo',
-    },
-  ];
+  //Services
+  practiceService = inject(PracticesService);
+  tests$!: Observable<PracticeTest[]>;
 
   ngAfterViewInit() {
+    this.tests$ = this.practiceService.getTest();
     this.loadQuestion();
   }
   selectOption(element: HTMLDivElement) {
@@ -71,9 +55,10 @@ export class PracticesComponent {
   }
 
   updateProgressBar() {
-    const progress =
-      ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
-    this.progressBar()!.nativeElement.style.width = `${progress}%`;
+    this.tests$.subscribe((tests) => {
+      const progress = ((this.currentQuestionIndex + 1) / tests.length) * 100;
+      this.progressBar()!.nativeElement.style.width = `${progress}%`;
+    });
   }
   showCompletionScreen() {
     this.quizContainer()!.nativeElement.classList.add('hidden');
@@ -121,13 +106,15 @@ export class PracticesComponent {
       this.quizContainer()!.nativeElement.classList.remove('fade-out');
       this.quizContainer()!.nativeElement.classList.add('fade-in');
 
-      if (this.currentQuestionIndex < this.questions.length - 1) {
-        this.currentQuestionIndex++;
-        this.loadQuestion();
-        this.selectedOption = null;
-      } else {
-        this.showCompletionScreen();
-      }
+      this.tests$.subscribe((tests) => {
+        if (this.currentQuestionIndex < tests.length - 1) {
+          this.currentQuestionIndex++;
+          this.loadQuestion();
+          this.selectedOption = null;
+        } else {
+          this.showCompletionScreen();
+        }
+      });
 
       setTimeout(() => {
         this.quizContainer()!.nativeElement.classList.remove('fade-in');
@@ -138,27 +125,29 @@ export class PracticesComponent {
   }
   loadQuestion() {
     //Mostramos la pregunta
-    const question = this.questions[this.currentQuestionIndex];
-    this.questionText()!.nativeElement.textContent = question.question;
+    this.tests$.subscribe((tests) => {
+      const question = tests[this.currentQuestionIndex];
+      this.questionText()!.nativeElement.textContent = question.question;
 
-    this.optionsContainer()!.nativeElement.innerHTML = '';
-    question.options.forEach((option, index) => {
-      const optionElement = document.createElement('div');
-      optionElement.classList.add(
-        'bg-gray-50',
-        'rounded-lg',
-        'p-4',
-        'border',
-        'border-gray-300',
-        'cursor-pointer',
-        'hover:bg-gray-100',
-        'relative'
-      );
-      optionElement.textContent = option;
-      optionElement.addEventListener('click', () => {
-        this.selectOption(optionElement);
+      this.optionsContainer()!.nativeElement.innerHTML = '';
+      question.options.forEach((option, index) => {
+        const optionElement = document.createElement('div');
+        optionElement.classList.add(
+          'bg-gray-50',
+          'rounded-lg',
+          'p-4',
+          'border',
+          'border-gray-300',
+          'cursor-pointer',
+          'hover:bg-gray-100',
+          'relative'
+        );
+        optionElement.textContent = option;
+        optionElement.addEventListener('click', () => {
+          this.selectOption(optionElement);
+        });
+        this.optionsContainer()!.nativeElement.appendChild(optionElement);
       });
-      this.optionsContainer()!.nativeElement.appendChild(optionElement);
     });
   }
 }

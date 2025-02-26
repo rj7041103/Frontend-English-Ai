@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { BehaviorSubject } from 'rxjs';
-import { ChatRoomItem, Message, Room } from '../models/chat.models';
+import { ChatRoomItem, Message } from '../models/chat.models';
 import { AppStore } from '../../../store/store';
 
 @Injectable({
@@ -49,7 +49,7 @@ export class ChatService {
   }
   handleChatRoom(roomObject: ChatRoomItem) {
     //we join a room
-    this.joinRoom(roomObject.room_name)
+    this.joinRoom(roomObject.room_name);
     //we clean the array of messages that we may have when changing rooms
     this._chat$.next([]);
     //we change the state of the room
