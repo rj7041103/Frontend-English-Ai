@@ -1,0 +1,27 @@
+<div class="bg-gray-900 h-screen flex flex-col items-center justify-center p-4 text-white">
+    <div #stars class="stars"></div>
+    <div class="bg-gray-800 z-20 rounded-lg shadow-lg p-8 max-w-md w-full text-center border border-blue-500">
+        <h1 class="text-4xl font-bold text-blue-400 mb-4">Error 404</h1>
+        <h2 class="text-2xl font-semibold text-gray-300 mb-6">Página no encontrada</h2>
+
+        <div class="planet-container mb-8">
+            <div class="planet">
+                <div #planetFace class="planet-face">
+                    <div #eyeLeft class="eye left"></div>
+                    <div #eyeRight class="eye right"></div>
+                    <div #mouth class="mouth"></div>
+                </div>
+                <div class="ring"></div>
+            </div>
+        </div>
+
+        <p class="text-gray-400 mb-6">Lo sentimos, la página que estás buscando no existe o no está disponible en este
+            momento.</p>
+
+        <button [routerLink]="['/']"
+            class="bg-blue-600  hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition duration-300 mx-auto">
+            Volver al inicio
+        </button>
+    </div>
+
+</div>

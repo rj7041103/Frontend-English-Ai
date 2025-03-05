@@ -48,4 +48,11 @@ export const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('../pages/no-found/no-found.component').then(
+        (c) => c.NoFoundComponent
+      ),
+  },
 ];

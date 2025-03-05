@@ -1,8 +1,25 @@
 <div id="container" class="bg-gray-100 h-screen flex items-center justify-center">
     <div #quizContainer class="bg-white shadow-md rounded-lg p-8 w-2/3 max-w-3xl quiz-container">
+        <!-- Timer -->
+        <div class="timer-container flex items-center mb-6">
+            <div class="clock-container">
+                <div class="clock-face">
+                    <div class="clock-center"></div>
+                    <div class="clock-hand hour-hand" #hourHand id="hour-hand"></div>
+                    <div class="clock-hand minute-hand" #minuteHand id="minute-hand"></div>
+                </div>
+            </div>
+            <div class="ml-4 flex-grow timer-bar-wrapper">
+                <div class="w-full bg-gray-200 rounded-full h-6">
+                    <div class="timer-bar" style="width: 100%;" #timerBar id="timer-bar"></div>
+                </div>
+            </div>
+            <div class="timer-text ml-4" #timerText id="timer-text">30s</div>
+        </div>
+
         <!-- Barra de Progreso -->
         <div class="mb-6">
-            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 ">
                 <div class="bg-blue-600 h-2.5 rounded-full" style="width: 0%;" #progressBar id="progress-bar"></div>
             </div>
         </div>
@@ -27,14 +44,101 @@
         </div>
     </div>
     <!-- Pantalla de finalización -->
-    <div #completionScreen id="completion-screen" class="hidden text-center">
+    <!-- <div #completionScreen id="completion-screen" class="hidden text-center">
         <div class="bg-white shadow-md rounded-lg p-8 max-w-2xl mx-auto">
             <h1 class="text-4xl font-bold text-blue-600 mb-4 animate-bounce">¡Felicidades! 🎉</h1>
             <p class="text-xl text-gray-700 mb-4">Has completado exitosamente el cuestionario</p>
             <canvas #confettiCanvas id="confetti-canvas"
                 class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
         </div>
+    </div> -->
+    @if(calculatePassStatus()){
+    <div #completionScreen id="completion-screen" class="hidden text-center">
+        <div class="bg-white shadow-md rounded-lg p-8 max-w-2xl mx-auto">
+            <h1 class="text-4xl font-bold text-blue-600 mb-4 animate-bounce">¡Felicidades! 🎉</h1>
+            <p class="text-xl text-gray-700 mb-4">Has completado exitosamente el cuestionario</p>
+            <canvas #confettiCanvas id="confetti-canvas"
+                class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+
+            <div #resultTable class="results-details mb-6  ">
+                <h2 class="text-2xl font-semibold mb-4">Resultados</h2>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="p-2">Pregunta</th>
+                            <th class="p-2">Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(result of (testsSubject | async) || []; track result.question){
+                        @if(result.userAnswer === result.answer){
+                        <tr class="bg-green-50">
+                            <td class="p-2">{{ result.question }}</td>
+                            <td class="p-2">Correcto</td>
+                        </tr>
+                        }
+                        @else{
+                        <tr class="bg-red-50">
+                            <td class="p-2">{{ result.question }}</td>
+                            <td class="p-2">{{result.userAnswer }}</td>
+                        </tr>
+                        }
+                        }
+
+                    </tbody>
+                </table>
+                <button id="continue-button"
+                    class="bg-blue-500 mt-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Continuar
+                </button>
+            </div>
+        </div>
     </div>
+    }
+    @else{
+    <div #completionScreen id="completion-screen" class="hidden text-center">
+        <div class="bg-white shadow-md rounded-lg p-8 max-w-2xl mx-auto">
+            <h1 class="text-4xl font-bold text-red-600 mb-4 animate-shake">¡Reprobado! 😟</h1>
+            <p class="text-xl text-gray-700 mb-4">No has completado el cuestionario satisfactoriamente</p>
+
+            <div #resultTable class="results-details mb-6  ">
+                <h2 class="text-2xl font-semibold mb-4">Resultados</h2>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="p-2">Pregunta</th>
+                            <th class="p-2">Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(result of (testsSubject | async) || []; track result.question){
+                        @if(result.userAnswer === result.answer){
+                        <tr class="bg-green-50">
+                            <td class="p-2">{{ result.question }}</td>
+                            <td class="p-2">Correcto</td>
+                        </tr>
+                        }
+                        @else{
+                        <tr class="bg-red-50">
+                            <td class="p-2">{{ result.question }}</td>
+                            <td class="p-2">{{result.userAnswer }}</td>
+                        </tr>
+                        }
+                        }
+
+                    </tbody>
+                </table>
+                <button id="continue-button" (click)="retryTest()"
+                    class="bg-blue-500 mt-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Reintentar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    }
+
+
 
 
 </div>
