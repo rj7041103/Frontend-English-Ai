@@ -8,6 +8,7 @@ export class IaService {
   async initModel(): Promise<void> {
     const tokenResponse = await fetch('http://localhost:3000/session');
     const data = await tokenResponse.json();
+    console.log(data.client_secret.value);
     this.Ephemeral_Token = data.client_secret.value;
   }
 
