@@ -49,6 +49,20 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'wordArrange',
+    loadComponent: () =>
+      import('../pages/rearrange-sentences/rearrange-sentences.component').then(
+        (c) => c.RearrangeSentencesComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'level',
+    loadComponent: () =>
+      import('../pages/level/level.component').then((c) => c.LevelComponent),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('../pages/no-found/no-found.component').then(
