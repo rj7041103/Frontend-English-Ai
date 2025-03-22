@@ -28,6 +28,8 @@ export class IAComponent {
     { code: 'en-US', name: 'Inglés (EE.UU.)' },
   ];
 
+  // Almacenar transcripción para mostrarla en el HTML
+  transcriptText = signal('');
   // Create a peer connection
   pc = new RTCPeerConnection();
   //Html Elements
@@ -194,7 +196,17 @@ export class IAComponent {
   setupChannel() {
     const dc = this.pc.createDataChannel('oai-events');
     dc.addEventListener('message', (e) => {
-      console.log(e);
+      try {
+        // Intenta parsear el JSON recibido
+        const message = JSON.parse(e.data);
+
+        // Verifica si 'part' existe antes de intentar acceder a 'transcript'
+        if (message && message.part && message.part.transcript) {
+          this.transcriptText.set(message.part.transcript);
+        }
+      } catch (error) {
+        console.error("Error al procesar el mensaje:", error);
+      }
     });
   }
 

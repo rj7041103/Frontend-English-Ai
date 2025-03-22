@@ -28,6 +28,12 @@
         </button>
     </div>
 
+    <!-- Subtítulos dinámicos -->
+    <div id="subtitles-container"
+        class="fixed bottom-10 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black bg-opacity-75 text-white text-lg rounded-lg shadow-lg transition-opacity duration-300"
+        [class.opacity-100]="transcriptText()" [class.opacity-0]="!transcriptText()">
+        {{ transcriptText() }}
+    </div>
 </div>
 <!-- <button (click)="toggleListening()">
     {{ isListening ? 'Detener' : 'Hablar' }}
