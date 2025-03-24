@@ -49,7 +49,16 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- Card Chat -->
-        <a [routerLink]="['/chat']" class="transform hover:scale-105 transition duration-300">
+        <a [routerLink]="['/level']" class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-comments text-2xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Level A1</h2>
+                <p class="text-gray-600">Inicia tu primer nivel</p>
+            </div>
+        </a>
+        <!-- <a [routerLink]="['/chat']" class="transform hover:scale-105 transition duration-300">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
                 <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
                     <i class="fas fa-comments text-2xl text-indigo-600"></i>
@@ -58,9 +67,9 @@
                 <p class="text-gray-600">Inicia una conversación privada con tus contactos</p>
             </div>
         </a>
-
+ -->
         <!-- Card Calendario -->
-        <a class="transform hover:scale-105 transition duration-300">
+        <!-- <a class="transform hover:scale-105 transition duration-300">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
                 <div class="flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
                     <i class="fas fa-calendar-alt text-2xl text-green-600"></i>
@@ -68,21 +77,30 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Calendario 📅</h2>
                 <p class="text-gray-600">Organiza tus eventos y reuniones</p>
             </div>
+        </a> -->
+        <a [routerLink]="['/level']" class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-comments text-2xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Level A2</h2>
+                <p class="text-gray-600">Inicia tu segundo nivel</p>
+            </div>
         </a>
 
         <!-- Card Tareas -->
-        <a [routerLink]="['/practices']" class="transform hover:scale-105 transition duration-300">
+        <a [routerLink]="['/session']" class="transform hover:scale-105 transition duration-300">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
                 <div class="flex items-center justify-center w-14 h-14 bg-purple-100 rounded-full mb-4">
                     <i class="fas fa-tasks text-2xl text-purple-600"></i>
                 </div>
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">Praticas ✅</h2>
-                <p class="text-gray-600">Practica tus frases y conocimientos</p>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Praticas AI ✅</h2>
+                <p class="text-gray-600">Practica tus habilidades linguisticas</p>
             </div>
         </a>
 
         <!-- Card Notas -->
-        <a class="transform hover:scale-105 transition duration-300">
+        <!--  <a class="transform hover:scale-105 transition duration-300">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
                 <div class="flex items-center justify-center w-14 h-14 bg-yellow-100 rounded-full mb-4">
                     <i class="fas fa-sticky-note text-2xl text-yellow-600"></i>
@@ -90,10 +108,19 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Notas 📝</h2>
                 <p class="text-gray-600">Toma notas rápidas y organizadas</p>
             </div>
+        </a> -->
+        <a [routerLink]="['/level']" class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-comments text-2xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Level B1</h2>
+                <p class="text-gray-600">Inicia tu tercer nivel</p>
+            </div>
         </a>
 
         <!-- Card Archivos -->
-        <a class="transform hover:scale-105 transition duration-300">
+        <!-- <a class="transform hover:scale-105 transition duration-300">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
                 <div class="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
                     <i class="fas fa-file-alt text-2xl text-blue-600"></i>
@@ -101,10 +128,28 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Archivos 📁</h2>
                 <p class="text-gray-600">Administra y comparte tus archivos</p>
             </div>
+        </a> -->
+        <a [routerLink]="['/level']" class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-comments text-2xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Level B2</h2>
+                <p class="text-gray-600">Inicia tu cuarto nivel</p>
+            </div>
         </a>
 
         <!-- Card Configuración -->
-        <a class="transform hover:scale-105 transition duration-300">
+        <a [routerLink]="['/chat']" class="transform hover:scale-105 transition duration-300">
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+                <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-comments text-2xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Chat 💬</h2>
+                <p class="text-gray-600">Chat de Comunidad</p>
+            </div>
+        </a>
+        <!-- <a class="transform hover:scale-105 transition duration-300">
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
                 <div class="flex items-center justify-center w-14 h-14 bg-gray-100 rounded-full mb-4">
                     <i class="fas fa-cog text-2xl text-gray-600"></i>
@@ -112,7 +157,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Configuración ⚙️</h2>
                 <p class="text-gray-600">Personaliza tu experiencia</p>
             </div>
-        </a>
+        </a> -->
     </div>
 </main>
 

@@ -7,13 +7,14 @@ import {
 } from '@angular/core';
 import confetti from 'canvas-confetti';
 import { PracticesService } from './service/practices.service';
-import { BehaviorSubject, map, Observable, Subscription, toArray } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { PracticeTest } from './models/practices.model';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-practices',
-  imports: [AsyncPipe, CommonModule],
+  imports: [AsyncPipe, CommonModule, RouterLink],
   templateUrl: './practices.component.html',
   styleUrl: './practices.component.css',
 })

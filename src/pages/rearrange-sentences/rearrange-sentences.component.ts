@@ -1,8 +1,9 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import { RearrangeSentences } from './models/sentences.model';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-rearrange-sentences',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './rearrange-sentences.component.html',
   styleUrl: './rearrange-sentences.component.css',
 })
@@ -39,6 +40,8 @@ export class RearrangeSentencesComponent {
       sentence: 'he always drinks coffee in the morning',
     },
   ];
+
+  //Variables
   currentLevel = 1;
 
   wordBank: (string | null)[] = [];
@@ -52,6 +55,8 @@ export class RearrangeSentencesComponent {
   draggedElement: null | HTMLElement = null;
 
   dragStartIndex: number | null = null;
+
+  router = inject(Router);
 
   //HTML elements
   checkBtn = viewChild<ElementRef<HTMLButtonElement>>('checkBtn');
@@ -193,7 +198,7 @@ export class RearrangeSentencesComponent {
   }
 
   updateProgressBar() {
-    const progressPercentage = (this.wordsLearned / this.totalWords) * 100;
+    const progressPercentage = this.currentLevel;
     document.getElementById('progress')!.style.width = `${progressPercentage}%`;
   }
 
@@ -381,6 +386,10 @@ export class RearrangeSentencesComponent {
     this.currentLevel++;
     if (this.currentLevel > this.wordLists.length) {
       this.showGameCompleted();
+      this.checkBtn()!.nativeElement.textContent = 'Next Level';
+      this.checkBtn()!.nativeElement.addEventListener('click', () => {
+        this.router.navigateByUrl('/practices');
+      });
       this.currentLevel = 1;
     }
     this.updateLevelDisplay();
