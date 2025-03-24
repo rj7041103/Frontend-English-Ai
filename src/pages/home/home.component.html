@@ -7,16 +7,17 @@
                     <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z" />
                     <path d="M10 4a1 1 0 100 2 1 1 0 000-2z" />
                 </svg>
-                <span class="text-2xl font-bold text-gray-800 dark:text-white">LearnEnglish</span>
+                <span class="text-2xl font-bold text-gray-800 dark:text-white">SmartEnglish AI</span>
             </div>
             @if(!wasMenuOpen()){
             <div class="hidden md:flex items-center space-x-8">
-                <a href="https://example.com/cursos"
+                <!-- Comentado por Andres Hurtado 23/03/25 11:35 pm -->
+                <!-- <a href="https://example.com/cursos"
                     class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors">{{'courseButton'
                     | translate }}</a>
                 <a href="https://example.com/practica"
                     class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors">{{'practiceButton'
-                    | translate }}</a>
+                    | translate }}</a> -->
 
                 <button (click)="setDarkMode()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700">
                     @if(!darkMode$()){
@@ -27,6 +28,11 @@
 
                     }
                 </button>
+
+                <!-- Modificado por Andres Hurtado 23/03/25 11:44 pm -->
+                <app-select-translation (changeFlagEvent)="changeFlag($event)" />
+                <img [src]="flag_url" alt="" class="w-7 h-7">
+
                 @if(!isLogged()){
                 <a [routerLink]="['/login']"
                     class="px-6 py-2 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors">{{'loginButton'
@@ -37,10 +43,6 @@
                     class="px-6 py-2 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors">{{'logoutButton'
                     | translate }}</a>
                 }
-
-                <app-select-translation (changeFlagEvent)="changeFlag($event)" />
-                <img [src]="flag_url" alt="" class="w-7 h-7">
-
             </div>
             }
             @else{
@@ -50,12 +52,13 @@
                 [class.max-h-0]="!wasMenuOpen()" [class.max-h-[500px]]="wasMenuOpen()">
                 <div class="px-4 py-6 space-y-6">
                     <div class="flex flex-col items-center space-y-6">
-                        <a href="https://example.com/cursos"
+                        <!-- Comentado por Andres Hurtado 23/03/25 11:35 pm -->
+                        <!-- <a href="https://example.com/cursos"
                             class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors text-lg">{{'courseButton'
                             | translate }}</a>
                         <a href="https://example.com/practica"
                             class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors text-lg">{{'practiceButton'
-                            | translate }}</a>
+                            | translate }}</a> -->
 
                         <div class="flex items-center space-x-4">
                             <button (click)="setDarkMode()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700">
@@ -110,10 +113,11 @@
                     class="px-8 py-3 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors text-lg font-semibold">
                     {{'startButton'| translate }}
                 </a>
-                <a href="https://example.com/demo"
+                <!-- Comentado por Andres Hurtado 23/03/25 11:35 pm -->
+                <!-- <a href="https://example.com/demo"
                     class="px-8 py-3 rounded-full border-2 border-[#3b82f6] text-[#3b82f6] hover:bg-primary hover:text-white dark:text-white transition-colors text-lg font-semibold">
                     {{'demoButton'| translate }}
-                </a>
+                </a> -->
             </div>
         </div>
 
@@ -215,7 +219,8 @@
             <div>
                 <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{'footerProducts'| translate }}
                 </h4>
-                <ul class="space-y-2">
+                <!-- Comentado por Andres Hurtado 23/03/25 11:35 pm -->
+                <!-- <ul class="space-y-2">
                     <li><a href="https://example.com/cursos"
                             class="text-gray-600 hover:text-primary dark:text-gray-300">{{'courseButton'| translate
                             }}</a></li>
@@ -223,7 +228,7 @@
                             class="text-gray-600 hover:text-primary dark:text-gray-300">{{'practiceButton'| translate
                             }}</a></li>
 
-                </ul>
+                </ul> -->
             </div>
 
             <div>
