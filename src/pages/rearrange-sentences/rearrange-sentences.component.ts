@@ -1,46 +1,15 @@
 import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import { RearrangeSentences } from './models/sentences.model';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { RearrangeSentencesService } from './service/rearrange-sentences.service';
 @Component({
   selector: 'app-rearrange-sentences',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './rearrange-sentences.component.html',
   styleUrl: './rearrange-sentences.component.css',
 })
 export class RearrangeSentencesComponent {
-  wordLists: RearrangeSentences[] = [
-    {
-      level: 1,
-      words: ['the', 'cat', 'is', 'black'],
-      sentence: 'the cat is black',
-    },
-    {
-      level: 2,
-      words: ['my', 'dog', 'likes', 'to', 'play'],
-      sentence: 'my dog likes to play',
-    },
-    {
-      level: 3,
-      words: ['she', 'reads', 'books', 'every', 'day'],
-      sentence: 'she reads books every day',
-    },
-    {
-      level: 4,
-      words: ['I', 'want', 'to', 'learn', 'English', 'today'],
-      sentence: 'I want to learn English today',
-    },
-    {
-      level: 5,
-      words: ['they', 'are', 'going', 'to', 'the', 'beach', 'tomorrow'],
-      sentence: 'they are going to the beach tomorrow',
-    },
-    {
-      level: 6,
-      words: ['he', 'always', 'drinks', 'coffee', 'in', 'the', 'morning'],
-      sentence: 'he always drinks coffee in the morning',
-    },
-  ];
-
   //Variables
   currentLevel = 1;
 
@@ -50,13 +19,17 @@ export class RearrangeSentencesComponent {
 
   wordsLearned = 0;
 
-  totalWords = this.wordLists.length;
+  totalWords: number = 0;
 
   draggedElement: null | HTMLElement = null;
 
   dragStartIndex: number | null = null;
 
   router = inject(Router);
+
+  rearrangeService = inject(RearrangeSentencesService);
+
+  rearrangeSubject = new BehaviorSubject<RearrangeSentences[]>([]);
 
   //HTML elements
   checkBtn = viewChild<ElementRef<HTMLButtonElement>>('checkBtn');
@@ -75,10 +48,14 @@ export class RearrangeSentencesComponent {
   }
 
   initializeGame() {
+    this.rearrangeService.getTest().subscribe((rearrange) => {
+      this.rearrangeSubject.next(rearrange);
+      this.loadLevel();
+      this.totalWords = this.rearrangeSubject.getValue().length;
+    });
     this.setupEventListeners();
     this.updateLevelDisplay();
     this.updateProgressBar();
-    this.loadLevel();
   }
 
   setupEventListeners() {
@@ -170,7 +147,7 @@ export class RearrangeSentencesComponent {
   }
 
   loadLevel() {
-    const levelData = this.wordLists[this.currentLevel - 1];
+    const levelData = this.rearrangeSubject.getValue()[this.currentLevel - 1];
     this.wordBank = this.shuffleArray([...levelData.words]);
     this.correctSentence = levelData.sentence;
 
@@ -309,7 +286,7 @@ export class RearrangeSentencesComponent {
   }
 
   resetSentence() {
-    const levelData = this.wordLists[this.currentLevel - 1];
+    const levelData = this.rearrangeSubject.getValue()[this.currentLevel - 1];
     this.wordBank = this.shuffleArray([...levelData.words]);
     this.renderWords();
     this.setupDragAndDrop();
@@ -330,7 +307,7 @@ export class RearrangeSentencesComponent {
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                ¡Correcto! You've mastered this sentence! 
+                ¡Correct! You've mastered this sentence! 
             </div>
         `;
 
@@ -384,7 +361,7 @@ export class RearrangeSentencesComponent {
 
   nextLevel() {
     this.currentLevel++;
-    if (this.currentLevel > this.wordLists.length) {
+    if (this.currentLevel > this.rearrangeSubject.getValue().length) {
       this.showGameCompleted();
       this.checkBtn()!.nativeElement.textContent = 'Next Level';
       this.checkBtn()!.nativeElement.addEventListener('click', () => {

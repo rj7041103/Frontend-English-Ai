@@ -40,6 +40,8 @@ export class IAComponent {
     'soundwavescontainer'
   );
   button = viewChild<ElementRef<HTMLButtonElement>>('speakbutton');
+  timer = viewChild<ElementRef<HTMLSpanElement>>('timer');
+  timerContainer = viewChild<ElementRef<HTMLDivElement>>('timerContainer');
   //Audio Element
   audioEl = viewChild<ElementRef<HTMLAudioElement>>('audio');
 
@@ -48,6 +50,9 @@ export class IAComponent {
   private animationTimeline!: gsap.core.Timeline;
   private particles: gsap.core.Tween[] = [];
   private soundWaves: gsap.core.Tween[] = [];
+  private isSpeaking = false;
+  private timerInterval: any = null;
+  private timeLeft = 20 * 60;
 
   constructor(private chatGptService: IaService) {
     afterNextRender(() => {
@@ -80,6 +85,10 @@ export class IAComponent {
   }
 
   private stopAnimation() {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
     this.animationTimeline?.kill();
     gsap.to(this.sphere()!.nativeElement, {
       duration: 0.3,
@@ -96,6 +105,27 @@ export class IAComponent {
     this.soundWavesContainer()!.nativeElement.innerHTML = '';
   }
 
+  updateTimer() {
+    const minutes = Math.floor(this.timeLeft / 60);
+    const seconds = this.timeLeft % 60;
+    this.timer()!.nativeElement.textContent = `${minutes
+      .toString()
+      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    if (this.timeLeft <= 0) {
+      if (this.timerInterval !== null) {
+        this.isListening.set(false);
+        clearInterval(this.timerInterval);
+      }
+      if (this.isSpeaking) {
+        this.isSpeaking = false;
+        this.button()!.nativeElement.textContent = 'Hablar / Speak';
+        this.stopAnimation();
+      }
+    } else {
+      this.timeLeft--;
+    }
+  }
   private createParticles() {
     const numParticles = 20;
 
@@ -180,6 +210,8 @@ export class IAComponent {
     await this.setupAudioRecorder();
     this.setupChannel();
     await this.chatGptService.chatGPTResponse(this.pc);
+    this.isSpeaking = !this.isSpeaking;
+    this.timerInterval = setInterval(() => this.updateTimer(), 1000);
   }
 
   async setupAudioRecorder() {
@@ -205,7 +237,7 @@ export class IAComponent {
           this.transcriptText.set(message.part.transcript);
         }
       } catch (error) {
-        console.error("Error al procesar el mensaje:", error);
+        console.error('Error al procesar el mensaje:', error);
       }
     });
   }
@@ -228,11 +260,15 @@ export class IAComponent {
 
   private async startListening() {
     this.isListening.set(true);
+    this.timeLeft = 20 * 60; // Resetear a 20 minutos
+    this.timer()!.nativeElement.textContent = '20:00'; // Actualizar visualmente
     await this.initSpeech();
   }
 
   private async stopListening() {
     this.isListening.set(false);
+    this.timeLeft = 20 * 60; // Resetear el contador
+    this.timer()!.nativeElement.textContent = '20:00'; // Actualizar UI
     // Cerrar la conexión WebRTC
     this.pc.close();
     this.pc = new RTCPeerConnection();

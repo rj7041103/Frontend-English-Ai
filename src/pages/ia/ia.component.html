@@ -6,6 +6,15 @@
 </select> -->
 <div id="body" class="bg-gray-900 text-white flex items-center justify-center h-screen">
 
+    <!-- Add timer container -->
+    <div #timerContainer id="timer-container"
+        class="fixed top-4 right-4 flex items-center bg-gray-800 rounded-lg px-3 py-2">
+        <div class="animate-pulse mr-2">
+            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+        </div>
+        <span #timer id="timer" class="font-mono text-xl">20:00</span>
+    </div>
+
     <div class="container text-center">
         <div #spherecontainer id="spherecontainer" class="relative w-64 h-64 mx-auto mb-8">
             <!-- Esfera animada SVG -->

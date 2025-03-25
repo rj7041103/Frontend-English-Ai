@@ -13,14 +13,6 @@ export class PracticesService {
 
   getTest() {
     // Cambiamos la tipificación a any[] para el get inicial
-    return this.http.get<any[]>(this.END_POINT).pipe(
-      map((tests) => {
-        return tests.map((test) => ({
-          ...test,
-          // Convertir el string de options a array
-          options: JSON.parse(test.options.replace(/'/g, '"')),
-        })) as PracticeTest[]; // Hacemos el casting al tipo correcto al final
-      })
-    );
+    return this.http.get<any[]>(this.END_POINT);
   }
 }
