@@ -1,16 +1,15 @@
-<div
-    class="bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 min-h-screen flex items-center justify-center">
+<div id="container" class="from-slate-900 via-indigo-900 to-purple-900 min-h-screen flex items-center justify-center">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
-        <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 p-8">
-            <h1 class="text-5xl font-bold text-center text-white mb-2 glow-text animate__animated animate__fadeIn">
+        <div class="bg-white rounded-2xl shadow-2xl border border-white/20 p-8">
+            <h1 class="text-5xl font-bold text-center text-gray-900 mb-2 glow-text animate__animated animate__fadeIn">
                 Word Builder Challenge
             </h1>
 
             <div class="flex justify-between items-center mb-6">
-                <div class="text-white/80 text-lg"><span class="font-bold text-blue-400">Level:</span> <span
+                <div class="text-gray-900 text-lg"><span class="font-bold text-blue-400">Level:</span> <span
                         #leveldisplay id="level-display" class="text-xl">1</span></div>
                 <div class="flex items-center">
-                    <div class="text-white/80 mr-2">Words learned:</div>
+                    <div class="text-gray-900 mr-2">Words learned:</div>
                     <div #progressbar id="progress-bar" class="w-40 h-3 bg-white/20 rounded-full overflow-hidden">
                         <div #progress id="progress" class="h-full bg-gradient-to-r from-blue-400 to-indigo-600"
                             style="width: 0%"></div>
@@ -18,7 +17,7 @@
                 </div>
             </div>
 
-            <div class="text-white/70 text-center mb-6 animate__animated animate__fadeIn">
+            <div class="text-gray-900 text-center mb-6 animate__animated animate__fadeIn">
                 <p #instruction id="instruction" class="italic">Drag and drop to arrange the words into a correct
                     English sentence.
                 </p>
@@ -27,7 +26,7 @@
             <div #gameContainer id="game-container" class="grid grid-cols-1 gap-8">
                 <div #sentenceArea id="sentence-area"
                     class="bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-xl p-6 sentence-area transition-all duration-300">
-                    <div class="text-white/50 text-center text-lg pointer-events-none" id="empty-prompt" #emptyPrompt>
+                    <div class="text-gray-900 text-center text-lg pointer-events-none" id="empty-prompt" #emptyPrompt>
                         Arrange the
                         words to form a sentence</div>
                 </div>

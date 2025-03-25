@@ -1,157 +1,189 @@
 /* Estilos adicionales para un look futurista */
 #container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #667eea, #764ba2);
-    color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: #333;
+}
+
+.option-selected,
+.correct,
+.incorrect {
+  border: 2px solid !important;
+  box-shadow: 0 0 5px;
+  position: relative;
+
+}
+
+.correct {
+  border-color: #4caf50 !important;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+}
+
+.correct::after {
+  content: '✓';
+  color: #4caf50;
+}
+
+.incorrect {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 5px rgba(239, 68, 68, 0.6);
+}
+
+.incorrect::after {
+  content: '✖';
+  color: #ef4444;
+}
+
+.correct::after,
+.incorrect::after {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+}
+
+/* Clock animation styles */
+.clock-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.clock-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #3B82F6;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background-color: #333;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.clock-hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: left center;
+  border-radius: 4px;
+}
+
+.hour-hand {
+  width: 20px;
+  height: 4px;
+  margin-top: -2px;
+  background-color: #333;
+  z-index: 2;
+}
+
+.minute-hand {
+  width: 25px;
+  height: 2px;
+  margin-top: -1px;
+  background-color: #666;
+  z-index: 1;
+}
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.timer-bar-wrapper {
+  flex-grow: 1;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.timer-bar {
+  height: 100%;
+  background-color: #10B981;
+  border-radius: 3px;
+  transition: width 1s linear, background-color 0.5s ease;
+}
+
+.timer-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 1rem;
+  min-width: 50px;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
   }
-  
-  .option-selected, .correct, .incorrect {
-    border: 2px solid !important;
-    box-shadow: 0 0 5px;
-    position: relative;
-    
+
+  to {
+    opacity: 0;
   }
-  
-  .correct {
-    border-color: #4caf50 !important;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); 
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
   }
-  
-  .correct::after {
-    content: '✓';
-    color: #4caf50;
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .incorrect {
-    border-color: #ef4444 !important;
-    box-shadow: 0 0 5px rgba(239, 68, 68, 0.6);
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
   }
-  
-  .incorrect::after {
-    content: '✖';
-    color: #ef4444;
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
   }
-  
-  .correct::after, .incorrect::after {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    font-size: 1.25rem;
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
   }
-  
-  /* Clock animation styles */
-  .clock-container {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto;
-  }
-  
-  .clock-face {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 3px solid #3B82F6;
-    position: relative;
-    background-color: #f0f0f0;
-  }
-  
-  .clock-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    margin: -3px 0 0 -3px;
-    background-color: #333;
-    border-radius: 50%;
-    z-index: 3;
-  }
-  
-  .clock-hand {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: left center;
-    border-radius: 4px;
-  }
-  
-  .hour-hand {
-    width: 20px;
-    height: 4px;
-    margin-top: -2px;
-    background-color: #333;
-    z-index: 2;
-  }
-  
-  .minute-hand {
-    width: 25px;
-    height: 2px;
-    margin-top: -1px;
-    background-color: #666;
-    z-index: 1;
-  }
-  
-  .timer-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .timer-bar-wrapper {
-    flex-grow: 1;
-    height: 6px;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  
-  .timer-bar {
-    height: 100%;
-    background-color: #10B981;
-    border-radius: 3px;
-    transition: width 1s linear, background-color 0.5s ease;
-  }
-  
-  .timer-text {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-left: 1rem;
-    min-width: 50px;
-  }
-  
-  .fade-out {
-    animation: fadeOut 0.5s ease forwards;
-  }
-  
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease forwards;
-  }
-  
-  .animate-shake {
-    animation: shake 0.5s ease;
-  }
-  
-  .fade-in {
-    animation: fadeIn 0.5s ease forwards;
-  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
