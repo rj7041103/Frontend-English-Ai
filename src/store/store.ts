@@ -9,14 +9,29 @@ type AppState = {
   room: ChatRoomItem | null;
   userProgress: {
     currentLevel: 1 | 2 | 3;
-    completedTasks: number;
-  } | null;
+    completedQuestions: number;
+    unlockedLevels: number[];
+    totalTasks: {
+      level1: number;
+      level2: number;
+      level3: number;
+    };
+  };
 };
 
 const initialState: AppState = {
   chat: [],
   room: null,
-  userProgress: null,
+  userProgress: {
+    currentLevel: 1,
+    completedQuestions: 0,
+    unlockedLevels: [1],
+    totalTasks: {
+      level1: 10,
+      level2: 10,
+      level3: 1,
+    },
+  },
 };
 const MAX_TASKS_PER_LEVEL = {
   1: 10, // 10 tarea de ordenación
@@ -33,7 +48,6 @@ export const AppStore = signalStore(
     updateChat: (message: Message, chatService: ChatService) => {
       chatService.sendMessageRoom(message);
       chatService.chat$.subscribe((data) => {
-        console.log('La data recibida es: ', data);
         patchState(store, {
           chat: [...data],
         });
@@ -50,26 +64,26 @@ export const AppStore = signalStore(
     },
 
     handleChatRoom(roomName: ChatRoomItem) {},
-    completeTask() {
+    completeTask(level: 1 | 2 | 3) {
       patchState(store, (state) => {
-        if (!state.userProgress) {
-          return {
-            userProgress: {
-              currentLevel: 1 as 1 | 2 | 3,
-              completedTasks: 1,
-            },
-          };
-        }
-
         const progress = { ...state.userProgress };
-        const maxTasks = MAX_TASKS_PER_LEVEL[progress.currentLevel];
 
-        if (progress.completedTasks + 1 >= maxTasks) {
-          const nextLevel = Math.min(progress.currentLevel + 1, 3) as 1 | 2 | 3;
+        // Verificar si la tarea corresponde al nivel actual
+        if (level !== progress.currentLevel) return state;
+
+        const newCompleted = progress.completedQuestions + 1;
+        const maxTasks = progress.totalTasks[`level${level}`];
+
+        // Determinar si se completa el nivel
+        if (newCompleted >= maxTasks) {
+          const nextLevel = Math.min(level + 1, 3) as 1 | 2 | 3;
+
           return {
             userProgress: {
+              ...progress,
               currentLevel: nextLevel,
-              completedTasks: nextLevel === 3 ? 1 : 0,
+              completedQuestions: 0,
+              unlockedLevels: [...progress.unlockedLevels, nextLevel],
             },
           };
         }
@@ -77,10 +91,15 @@ export const AppStore = signalStore(
         return {
           userProgress: {
             ...progress,
-            completedTasks: progress.completedTasks + 1,
+            completedQuestions: newCompleted,
           },
         };
       });
+    },
+
+    // Método para verificar acceso a un nivel
+    isLevelUnlocked(level: number): boolean {
+      return store.userProgress().unlockedLevels.includes(level);
     },
   }))
 );
