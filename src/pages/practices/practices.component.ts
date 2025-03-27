@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import { PracticeTest } from './models/practices.model';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AppStore } from '../../store/store';
 
 @Component({
   selector: 'app-practices',
@@ -47,6 +48,7 @@ export class PracticesComponent {
   correctCount = 0;
   totalQuestions = 0;
   isReady = signal<boolean>(false);
+  appStore = inject(AppStore);
 
   //Services
   practiceService = inject(PracticesService);
@@ -144,6 +146,20 @@ export class PracticesComponent {
     clearInterval(this.timerInterval);
 
     if (option === correctAnswer) {
+      //update progress state in the second task
+      this.appStore.completeTask(2);
+      console.log(
+        'completed tasks: ',
+        this.appStore.userProgress().completedQuestions
+      );
+
+      console.log('current level: ', this.appStore.userProgress().currentLevel);
+
+      console.log(
+        'unlocked levels: ',
+        this.appStore.userProgress().unlockedLevels
+      );
+
       this.selectedOption!.classList.add(
         'border-green-500',
         'shadow-shadowGreen'

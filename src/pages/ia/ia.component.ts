@@ -3,6 +3,7 @@ import {
   Component,
   effect,
   ElementRef,
+  inject,
   signal,
   viewChild,
 } from '@angular/core';
@@ -11,6 +12,8 @@ import { Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
+import Typed from 'typed.js';
+import { AppStore } from '../../store/store';
 
 @Component({
   selector: 'app-ia',
@@ -53,6 +56,7 @@ export class IAComponent {
   private isSpeaking = false;
   private timerInterval: any = null;
   private timeLeft = 20 * 60;
+  appStore = inject(AppStore);
 
   constructor(private chatGptService: IaService) {
     afterNextRender(() => {
@@ -66,6 +70,30 @@ export class IAComponent {
         this.stopAnimation();
         this.button()!.nativeElement.textContent = 'Hablar';
       }
+    });
+  }
+
+  ngAfterViewInit() {
+    this.loadInstruction();
+  }
+
+  loadInstruction() {
+    let typed = new Typed('.typed', {
+      strings: [
+        '<span class="text-white">Click and Wait 5 seconds</span>',
+        '<span class="text-white">Say "what is your purpose?"</span>',
+        '<span class="text-white">Say "Repeat the sentences"</span>',
+        '<span class="text-white"></span>',
+      ],
+      stringsElement: '#container-text',
+      typeSpeed: 75,
+      startDelay: 300,
+      backSpeed: 75,
+      smartBackspace: true,
+      shuffle: false,
+      showCursor: false,
+      backDelay: 1500,
+      loop: false,
     });
   }
 
@@ -113,6 +141,8 @@ export class IAComponent {
       .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
     if (this.timeLeft <= 0) {
+      // Completar nivel 3 (1 tarea)
+      this.appStore.completeTask(3);
       if (this.timerInterval !== null) {
         this.isListening.set(false);
         clearInterval(this.timerInterval);
@@ -133,12 +163,12 @@ export class IAComponent {
       const particle = document.createElement('div');
       particle.className = 'particle absolute rounded-full';
       particle.style.cssText = `
-        width: 5px;
-        height: 5px;
-        background-color: #8B5CF6;
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
-      `;
+          width: 5px;
+          height: 5px;
+          background-color: #8B5CF6;
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+        `;
 
       this.particlesContainer()!.nativeElement.appendChild(particle);
 
@@ -176,18 +206,18 @@ export class IAComponent {
       const xPosition = i * (barWidth + spacing) - containerWidth / 2;
 
       bar.style.cssText = `
-        width: ${barWidth}px;
-        height: 20px;
-        background: linear-gradient(to top, #8B5CF6, #6366F1);
-        position: absolute;
-        left: 50%;
-        margin-left: ${xPosition}px;
-        bottom: 50%;
-        transform-origin: bottom;
-        border-radius: 3px 3px 0 0;
-        opacity: 0.8;
-        box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
-      `;
+          width: ${barWidth}px;
+          height: 20px;
+          background: linear-gradient(to top, #8B5CF6, #6366F1);
+          position: absolute;
+          left: 50%;
+          margin-left: ${xPosition}px;
+          bottom: 50%;
+          transform-origin: bottom;
+          border-radius: 3px 3px 0 0;
+          opacity: 0.8;
+          box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+        `;
 
       this.soundWavesContainer()!.nativeElement.appendChild(bar);
 

@@ -3,6 +3,7 @@ import { RearrangeSentences } from './models/sentences.model';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { RearrangeSentencesService } from './service/rearrange-sentences.service';
+import { AppStore } from '../../store/store';
 @Component({
   selector: 'app-rearrange-sentences',
   imports: [],
@@ -31,6 +32,8 @@ export class RearrangeSentencesComponent {
 
   rearrangeSubject = new BehaviorSubject<RearrangeSentences[]>([]);
 
+  appStore = inject(AppStore);
+
   //HTML elements
   checkBtn = viewChild<ElementRef<HTMLButtonElement>>('checkBtn');
   nextLevelBtn = viewChild<ElementRef<HTMLButtonElement>>('nextLevelBtn');
@@ -48,16 +51,19 @@ export class RearrangeSentencesComponent {
   }
 
   initializeGame() {
-    this.rearrangeService.getTest().subscribe((rearrange) => {
-      this.rearrangeSubject.next(rearrange);
-      this.loadLevel();
-      this.totalWords = this.rearrangeSubject.getValue().length;
-    });
+    this.loadData();
     this.setupEventListeners();
     this.updateLevelDisplay();
     this.updateProgressBar();
   }
 
+  loadData() {
+    this.rearrangeService.getTest().subscribe((rearrange) => {
+      this.rearrangeSubject.next(rearrange);
+      this.loadLevel();
+      this.totalWords = this.rearrangeSubject.getValue().length;
+    });
+  }
   setupEventListeners() {
     this.checkBtn()!.nativeElement.addEventListener('click', () =>
       this.checkSentence()
@@ -307,13 +313,22 @@ export class RearrangeSentencesComponent {
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-<<<<<<< HEAD
-                ¡Correct! You've mastered this sentence! 
-=======
                 Great job! You've mastered this sentence! 
->>>>>>> 0f6f972670ade8f8299494aa62db5ad39b94f7fb
             </div>
         `;
+      //update progress state
+      this.appStore.completeTask(1);
+      console.log(
+        'completed tasks: ',
+        this.appStore.userProgress().completedQuestions
+      );
+
+      console.log('current level: ', this.appStore.userProgress().currentLevel);
+
+      console.log(
+        'unlocked levels: ',
+        this.appStore.userProgress().unlockedLevels
+      );
 
       // Make all words glow
       wordElements.forEach((el) => {
@@ -378,6 +393,12 @@ export class RearrangeSentencesComponent {
   }
 
   showGameCompleted() {
+    this.appStore.completeTask(1);
+    console.log(
+      'current level final: ',
+      this.appStore.userProgress().currentLevel
+    );
+
     this.gameContainer()!.nativeElement.innerHTML = `
         <div class="text-center py-10 animate__animated animate__fadeIn">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-yellow-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
