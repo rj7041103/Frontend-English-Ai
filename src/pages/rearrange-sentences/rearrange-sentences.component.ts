@@ -403,4 +403,8 @@ export class RearrangeSentencesComponent {
     }
     return newArray;
   }
+
+  navigateToHome() {
+    this.router.navigate(['/level']);
+  }
 }

@@ -1,5 +1,8 @@
 <div id="container" class="bg-gray-100 h-screen flex items-center justify-center">
-    <div #quizContainer class="bg-white shadow-md rounded-lg p-8 w-2/3 max-w-3xl quiz-container">
+    <div #quizContainer class="bg-white shadow-2xl rounded-lg p-8 w-2/3 max-w-3xl quiz-container">
+        <h1 class="text-4xl font-bold text-center text-gray-900 mb-2 glow-text animate__animated animate__fadeIn">
+            Pick the Right Answer
+        </h1>
         <!-- Timer -->
         <div class="timer-container flex items-center mb-6">
             <div class="clock-container">
@@ -37,10 +40,28 @@
         <!-- Botón Siguiente -->
         <div class="flex justify-center">
             <button (click)="nextQuestion()" id="next-button"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                class="bg-blue-500 hover:bg-blue-700 text-white flex items-center font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button">
-                Siguiente
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                Next
             </button>
+        </div>
+
+        <!-- Navigation bar -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-1">
+            <div class="flex justify-around items-center max-w-xl mx-auto">
+                <button routerLink="/level" class="flex flex-col items-center text-[#58CC02]">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    <span class="text-xs">Home</span>
+                </button>
+            </div>
         </div>
     </div>
     <!-- Pantalla de finalización -->
@@ -137,6 +158,5 @@
             </div>
         </div>
     </div>
-
     }
 </div>

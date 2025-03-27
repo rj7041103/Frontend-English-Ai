@@ -1,7 +1,7 @@
 /* Estilos adicionales para un look futurista */
 #container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #667eea, #764ba2);
+  /* background: linear-gradient(to right, #667eea, #764ba2); */
   color: #333;
 }
 
