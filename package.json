@@ -28,6 +28,7 @@
     "@ngrx/signals": "^19.0.0",
     "@ngrx/store": "^19.0.0",
     "@types/gsap": "^1.20.2",
+    "@types/node": "^22.13.14",
     "@types/webspeechapi": "^0.0.29",
     "canvas-confetti": "^1.9.3",
     "google": "^2.1.0",
