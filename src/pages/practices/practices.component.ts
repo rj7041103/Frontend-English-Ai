@@ -148,7 +148,10 @@ export class PracticesComponent {
     if (option === correctAnswer) {
       //update progress state in the second task
       this.appStore.completeTask(2);
-      console.log(
+
+      this.appStore.saveProgressTasks();
+      this.appStore.saveProgressEnglishLevel();
+      /* console.log(
         'completed questions: ',
         this.appStore.userProgress().completedQuestions
       );
@@ -159,7 +162,7 @@ export class PracticesComponent {
       );
 
       console.log('English level: ', this.appStore.userProgress().englishLevel);
-
+ */
       this.selectedOption!.classList.add(
         'border-green-500',
         'shadow-shadowGreen'
@@ -234,7 +237,11 @@ export class PracticesComponent {
   calculatePassStatus(): boolean {
     //console.log('t: ', this.totalQuestions);
     const percentage = (this.correctCount / this.totalQuestions) * 100;
-    return percentage >= 65;
+    if (percentage <= 65) {
+      return false;
+    }
+    //this.appStore.saveProgressEnglishLevel();
+    return true;
   }
 
   updateProgressBar() {

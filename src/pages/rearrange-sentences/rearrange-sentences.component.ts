@@ -180,7 +180,7 @@ export class RearrangeSentencesComponent {
   }
 
   updateProgressBar() {
-    const progressPercentage = this.currentLevel;
+    const progressPercentage = (this.currentLevel * 100) / this.totalWords;
     document.getElementById('progress')!.style.width = `${progressPercentage}%`;
   }
 
@@ -317,7 +317,7 @@ export class RearrangeSentencesComponent {
         `;
       //update progress state
       this.appStore.completeTask(1);
-      console.log(
+      /* console.log(
         'completed questions: ',
         this.appStore.userProgress().completedQuestions
       );
@@ -328,7 +328,7 @@ export class RearrangeSentencesComponent {
       );
 
       console.log('English level: ', this.appStore.userProgress().englishLevel);
-
+ */
       // Make all words glow
       wordElements.forEach((el) => {
         el.classList.add('correct-word');
@@ -393,8 +393,8 @@ export class RearrangeSentencesComponent {
 
   showGameCompleted() {
     this.appStore.completeTask(1);
-
     this.appStore.saveProgressEnglishLevel();
+    this.appStore.saveProgressTasks();
     // Stop show instructions message
     this.instruction()!.nativeElement.textContent = '';
     console.log(

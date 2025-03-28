@@ -8,7 +8,14 @@ import {
   viewChild,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSun,
+  faMoon,
+  faBars,
+  faVideo,
+  faUsers,
+  faChartLine,
+} from '@fortawesome/free-solid-svg-icons';
 import { SelectTranslationComponent } from '../../shared/components/select-translation/select-translation.component';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
@@ -38,6 +45,9 @@ export class HomeComponent {
   faFacebookF = faFacebookF;
   faInstagram = faInstagram;
   faTwitter = faTwitter;
+  faUsers = faUsers;
+  faVideo = faVideo;
+  faChartLine = faChartLine;
 
   //section for darkMode
   private darkMode = signal<boolean>(false);

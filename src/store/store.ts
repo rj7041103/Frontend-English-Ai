@@ -10,7 +10,7 @@ type AppState = {
   userProgress: {
     englishLevel: 'A1' | 'A2' | 'B1' | 'B2';
     unlockedEnglishLevels: ('A1' | 'A2' | 'B1' | 'B2')[];
-    currentTaskLevel: 1 | 2 | 3;
+    currentTaskLevel: 1 | 2 | 3 | 4;
     completedQuestions: number;
     totalTasks: {
       level1: number;
@@ -78,8 +78,8 @@ export const AppStore = signalStore(
 
         // Determinar si se completa el nivel
         if (newCompleted >= maxTasks) {
-          const nextLevel = Math.min(level + 1, 3) as 1 | 2 | 3;
-          if (nextLevel === 2) {
+          const nextLevel = Math.min(level + 1, 4) as 1 | 2 | 3 | 4;
+          if (nextLevel === 4) {
             const englishLevels = ['A1', 'A2', 'B1', 'B2'];
             const currentIndex = englishLevels.indexOf(progress.englishLevel);
             const nextEnglishLevel = englishLevels[currentIndex + 1];
@@ -122,6 +122,13 @@ export const AppStore = signalStore(
         store.userProgress().englishLevel
       );
 
+      localStorage.setItem(
+        'unlockedEnglishLevels',
+        JSON.stringify(store.userProgress().unlockedEnglishLevels)
+      );
+    },
+
+    saveProgressTasks() {
       localStorage.setItem(
         'currentTaskLevel',
         store.userProgress().currentTaskLevel + ''

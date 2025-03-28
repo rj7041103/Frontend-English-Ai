@@ -145,6 +145,7 @@ export class IAComponent {
       // Completar nivel 3 (1 tarea)
       this.appStore.completeTask(3);
       //se guarda el progreso en localStorage
+      this.appStore.saveProgressTasks();
       this.appStore.saveProgressEnglishLevel();
       if (this.timerInterval !== null) {
         this.isListening.set(false);
