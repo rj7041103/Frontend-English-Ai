@@ -149,16 +149,16 @@ export class PracticesComponent {
       //update progress state in the second task
       this.appStore.completeTask(2);
       console.log(
-        'completed tasks: ',
+        'completed questions: ',
         this.appStore.userProgress().completedQuestions
       );
 
-      console.log('current level: ', this.appStore.userProgress().currentLevel);
-
       console.log(
-        'unlocked levels: ',
-        this.appStore.userProgress().unlockedLevels
+        'current level: ',
+        this.appStore.userProgress().currentTaskLevel
       );
+
+      console.log('English level: ', this.appStore.userProgress().englishLevel);
 
       this.selectedOption!.classList.add(
         'border-green-500',
