@@ -76,13 +76,13 @@
     @if(calculatePassStatus()){
     <div #completionScreen id="completion-screen"
         class="hidden text-center fixed inset-0 bg-black bg-opacity-50 overflow-y-auto py-8">
-        <div class="bg-white shadow-md rounded-lg p-8 max-w-2xl mx-auto relative my-8">
+        <div class="bg-white shadow-md -mt-3 rounded-lg p-8 max-w-2xl mx-auto relative my-8">
             <h1 class="text-4xl font-bold text-blue-600 mb-4 animate-bounce">¡Felicidades! 🎉</h1>
             <p class="text-xl text-gray-700 mb-4">Has completado exitosamente el cuestionario</p>
             <canvas #confettiCanvas id="confetti-canvas"
                 class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
 
-            <div #resultTable class="results-details mb-6 max-h-[65vh] overflow-y-auto">
+            <div #resultTable class="results-details  max-h-[65vh] overflow-y-auto">
                 <h2 class="text-2xl font-semibold mb-4">Resultados</h2>
                 <table class="w-full text-left">
                     <thead>
@@ -109,22 +109,23 @@
 
                     </tbody>
                 </table>
-                <button id="continue-button" [routerLink]="['/session']"
-                    class="bg-blue-500 mt-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Continuar
-                </button>
+
             </div>
+            <button id="continue-button" [routerLink]="['/session']"
+                class="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Continuar
+            </button>
         </div>
     </div>
     }
     @else{
     <div #completionScreen id="completion-screen"
         class="hidden text-center fixed inset-0 bg-black bg-opacity-50 overflow-y-auto py-8">
-        <div class="bg-white shadow-md rounded-lg p-8 max-w-2xl mx-auto relative my-8">
+        <div class="bg-white -mt-3 shadow-md rounded-lg p-8 max-w-2xl mx-auto relative my-8">
             <h1 class="text-4xl font-bold text-red-600 mb-4 animate-shake">¡Reprobado! 😟</h1>
             <p class="text-xl text-gray-700 mb-4">No has completado el cuestionario satisfactoriamente</p>
 
-            <div #resultTable class="results-details mb-6 mb-6 max-h-[65vh] overflow-y-auto">
+            <div #resultTable class="results-details  max-h-[65vh] overflow-y-auto">
                 <h2 class="text-2xl font-semibold mb-4">Resultados</h2>
                 <table class="w-full text-left">
                     <thead>
@@ -151,11 +152,12 @@
 
                     </tbody>
                 </table>
-                <button id="continue-button" (click)="retryTest()"
-                    class="bg-blue-500 mt-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Reintentar
-                </button>
+
             </div>
+            <button id="continue-button" (click)="retryTest()"
+                class="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Reintentar
+            </button>
         </div>
     </div>
     }

@@ -168,7 +168,6 @@ export class RearrangeSentencesComponent {
 
     // Update instruction based on level
 
-    this.instruction()!.nativeElement.textContent = `Level ${this.currentLevel}: Arrange the words to form a correct English sentence.`;
     this.instruction()!.nativeElement.classList.add(
       'animate__animated',
       'animate__fadeIn'
@@ -181,7 +180,7 @@ export class RearrangeSentencesComponent {
   }
 
   updateProgressBar() {
-    const progressPercentage = this.currentLevel;
+    const progressPercentage = (this.currentLevel * 100) / this.totalWords;
     document.getElementById('progress')!.style.width = `${progressPercentage}%`;
   }
 
@@ -318,18 +317,18 @@ export class RearrangeSentencesComponent {
         `;
       //update progress state
       this.appStore.completeTask(1);
-      console.log(
-        'completed tasks: ',
+      /* console.log(
+        'completed questions: ',
         this.appStore.userProgress().completedQuestions
       );
 
-      console.log('current level: ', this.appStore.userProgress().currentLevel);
-
       console.log(
-        'unlocked levels: ',
-        this.appStore.userProgress().unlockedLevels
+        'current level: ',
+        this.appStore.userProgress().currentTaskLevel
       );
 
+      console.log('English level: ', this.appStore.userProgress().englishLevel);
+ */
       // Make all words glow
       wordElements.forEach((el) => {
         el.classList.add('correct-word');
@@ -394,9 +393,13 @@ export class RearrangeSentencesComponent {
 
   showGameCompleted() {
     this.appStore.completeTask(1);
+    this.appStore.saveProgressEnglishLevel();
+    this.appStore.saveProgressTasks();
+    // Stop show instructions message
+    this.instruction()!.nativeElement.textContent = '';
     console.log(
       'current level final: ',
-      this.appStore.userProgress().currentLevel
+      this.appStore.userProgress().currentTaskLevel
     );
 
     this.gameContainer()!.nativeElement.innerHTML = `
@@ -406,6 +409,7 @@ export class RearrangeSentencesComponent {
             </svg>
             <h2 class="text-3xl font-bold text-white mb-4">Congratulations!</h2>
             <p class="text-xl text-white/80 mb-8">You've completed all the levels and mastered ${this.wordsLearned} words!</p>
+            <p class="text-xl text-balck/80 mb-8">You've completed all the levels and mastered ${this.wordsLearned} words!</p>
         </div>
     `;
 

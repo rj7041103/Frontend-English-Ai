@@ -8,9 +8,10 @@ type AppState = {
   chat: Message[];
   room: ChatRoomItem | null;
   userProgress: {
-    currentLevel: 1 | 2 | 3;
+    englishLevel: 'A1' | 'A2' | 'B1' | 'B2';
+    unlockedEnglishLevels: ('A1' | 'A2' | 'B1' | 'B2')[];
+    currentTaskLevel: 1 | 2 | 3 | 4;
     completedQuestions: number;
-    unlockedLevels: number[];
     totalTasks: {
       level1: number;
       level2: number;
@@ -23,9 +24,10 @@ const initialState: AppState = {
   chat: [],
   room: null,
   userProgress: {
-    currentLevel: 1,
+    englishLevel: 'A1',
+    unlockedEnglishLevels: ['A1'],
+    currentTaskLevel: 1,
     completedQuestions: 0,
-    unlockedLevels: [1],
     totalTasks: {
       level1: 10,
       level2: 10,
@@ -65,25 +67,42 @@ export const AppStore = signalStore(
 
     handleChatRoom(roomName: ChatRoomItem) {},
     completeTask(level: 1 | 2 | 3) {
-      patchState(store, (state) => {
+      patchState(store, (state: any) => {
         const progress = { ...state.userProgress };
 
         // Verificar si la tarea corresponde al nivel actual
-        if (level !== progress.currentLevel) return state;
+        if (level !== progress.currentTaskLevel) return state;
 
         const newCompleted = progress.completedQuestions + 1;
         const maxTasks = progress.totalTasks[`level${level}`];
 
         // Determinar si se completa el nivel
         if (newCompleted >= maxTasks) {
-          const nextLevel = Math.min(level + 1, 3) as 1 | 2 | 3;
+          const nextLevel = Math.min(level + 1, 4) as 1 | 2 | 3 | 4;
+          if (nextLevel === 4) {
+            const englishLevels = ['A1', 'A2', 'B1', 'B2'];
+            const currentIndex = englishLevels.indexOf(progress.englishLevel);
+            const nextEnglishLevel = englishLevels[currentIndex + 1];
+
+            return {
+              userProgress: {
+                ...progress,
+                englishLevel: nextEnglishLevel,
+                unlockedEnglishLevels: [
+                  ...progress.unlockedEnglishLevels,
+                  nextEnglishLevel,
+                ],
+                currentTaskLevel: nextLevel,
+                completedQuestions: 0,
+              },
+            };
+          }
 
           return {
             userProgress: {
               ...progress,
-              currentLevel: nextLevel,
+              currentTaskLevel: nextLevel,
               completedQuestions: 0,
-              unlockedLevels: [...progress.unlockedLevels, nextLevel],
             },
           };
         }
@@ -97,9 +116,23 @@ export const AppStore = signalStore(
       });
     },
 
-    // Método para verificar acceso a un nivel
-    isLevelUnlocked(level: number): boolean {
-      return store.userProgress().unlockedLevels.includes(level);
+    saveProgressEnglishLevel() {
+      localStorage.setItem(
+        'user_english_level',
+        store.userProgress().englishLevel
+      );
+
+      localStorage.setItem(
+        'unlockedEnglishLevels',
+        JSON.stringify(store.userProgress().unlockedEnglishLevels)
+      );
+    },
+
+    saveProgressTasks() {
+      localStorage.setItem(
+        'currentTaskLevel',
+        store.userProgress().currentTaskLevel + ''
+      );
     },
   }))
 );

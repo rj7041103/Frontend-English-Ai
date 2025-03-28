@@ -5,10 +5,11 @@ import { faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../Auth/service/auth.service';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { TranslateCustomService } from '../../shared/translate/translateCustom.service';
+import { ItemBentoComponent } from './components/item-bento/item-bento.component';
 
 @Component({
   selector: 'app-aplication',
-  imports: [RouterLink, FontAwesomeModule, TranslateModule],
+  imports: [RouterLink, FontAwesomeModule, TranslateModule, ItemBentoComponent],
   templateUrl: './aplication.component.html',
   styleUrl: './aplication.component.css',
 })
