@@ -430,6 +430,6 @@ export class RearrangeSentencesComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/level']);
+    this.router.navigate(['/app']);
   }
 }

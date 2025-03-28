@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="fixed  w-full bg-white dark:bg-gray-800 shadow-lg z-50">
+<nav class="fixed w-full bg-white dark:bg-gray-800 shadow-lg z-50">
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center space-x-2">
@@ -9,6 +9,7 @@
                 </svg>
                 <span class="text-2xl font-bold text-gray-800 dark:text-white">SmartEnglish AI</span>
             </div>
+
             @if(!wasMenuOpen()){
             <div class="hidden md:flex items-center space-x-8">
                 <!-- Comentado por Andres Hurtado 23/03/25 11:35 pm -->
@@ -34,19 +35,18 @@
                 <img [src]="flag_url" alt="" class="w-7 h-7">
 
                 @if(!isLogged()){
-                <a [routerLink]="['/login']"
+                <button [routerLink]="['/login']"
                     class="px-6 py-2 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors">{{'loginButton'
-                    | translate }}</a>
+                    | translate }}</button>
                 }
                 @else{
-                <a (click)="signout()"
+                <button (click)="signout()"
                     class="px-6 py-2 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors">{{'logoutButton'
-                    | translate }}</a>
+                    | translate }}</button>
                 }
             </div>
             }
             @else{
-
             <!-- Mobile Menu -->
             <div class="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-800 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
                 [class.max-h-0]="!wasMenuOpen()" [class.max-h-[500px]]="wasMenuOpen()">
@@ -74,22 +74,19 @@
                         </div>
 
                         @if(!isLogged()){
-                        <a [routerLink]="['/login']"
+                        <button [routerLink]="['/login']"
                             class="w-full max-w-xs text-center px-6 py-3 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors text-lg font-semibold">{{'loginButton'
-                            | translate }}</a>
+                            | translate }}</button>
                         }
                         @else{
-                        <a (click)="signout()"
+                        <button (click)="signout()"
                             class="w-full max-w-xs text-center px-6 py-3 rounded-full bg-[#3b82f6] text-white hover:bg-blue-600 transition-colors text-lg font-semibold">{{'logoutButton'
-                            | translate }}</a>
+                            | translate }}</button>
                         }
                     </div>
                 </div>
             </div>
-
             }
-
-
 
             <button (click)="toggleMenu()" class="md:hidden text-gray-600 dark:text-gray-300">
                 <fa-icon [icon]="faBars" class=" text-2xl"></fa-icon>
@@ -126,16 +123,19 @@
 
             <div #carouselContainer class="carousel-container relative z-10 overflow-hidden rounded-lg shadow-xl h-96">
                 <div class="carousel-slide">
-                    <img src="../../assets/images/ingles1.jpg" alt="Estudio 1" class="w-full h-96 object-cover">
+                    <img src="../../assets/images/ingles1.jpg" alt="Image 1" class="w-full h-96 object-cover">
                 </div>
                 <div class="carousel-slide">
-                    <img src="../../assets/images/ingles2.jpg" alt="Estudio 2" class="w-full h-96 object-cover">
+                    <img src="../../assets/images/ingles2.jpg" alt="Image 2" class="w-full h-96 object-cover">
                 </div>
                 <div class="carousel-slide">
-                    <img src="../../assets/images/ingles3.jpg" alt="Estudio 3" class="w-full h-96 object-cover">
+                    <img src="../../assets/images/ingles3.jpg" alt="Image 3" class="w-full h-96 object-cover">
                 </div>
                 <div class="carousel-slide">
-                    <img src="../../assets/images/ingles4.jpg" alt="Estudio 4" class="w-full h-96 object-cover">
+                    <img src="../../assets/images/ingles4.jpg" alt="Image 4" class="w-full h-96 object-cover">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../assets/images/ingles5.jpg" alt="Image 5" class="w-full h-96 object-cover">
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <div class="min-h-screen">
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto p-2">
         <header
             class="flex justify-between items-center mb-8 px-4 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 shadow-md rounded-lg">
             <div class="flex items-center space-x-4">
@@ -41,7 +41,7 @@
 
             <div class="relative py-8">
                 <!-- Path SVG -->
-                <svg class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-full" style="z-index: 0;">
+                <svg class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-full" style="z-index: 2;">
                     <path d="M60 20 
                              Q 30 110, 60 200 
                              Q 90 290, 60 380
@@ -53,7 +53,7 @@
                     <div class="relative h-full">
                         <!-- Nivel 1 -->
                         <button data-level="1" [routerLink]="['/wordArrange']"
-                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[10%] left-1/2 -translate-x-1/2">
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[0%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">1</div>
                                 <div class="text-sm">Ordenar</div>
@@ -69,7 +69,7 @@
 
                         <!-- Nivel 2 -->
                         <button data-level="2" [routerLink]="['/practices']"
-                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[40%] left-1/2 -translate-x-1/2"
+                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[25%] left-1/2 -translate-x-1/2"
                             disabled>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">2</div>
@@ -79,7 +79,7 @@
 
                         <!-- Nivel 3 -->
                         <button data-level="3" [routerLink]="['/session']"
-                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[70%] left-1/2 -translate-x-1/2"
+                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[45%] left-1/2 -translate-x-1/2"
                             disabled>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">3</div>
@@ -93,8 +93,8 @@
     </div>
 
     <!-- Navigation bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2">
-        <div class="flex justify-around items-center max-w-xl mx-auto">
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 z-0">
+        <div class="flex justify-end items-center mx-8">
             <button routerLink="/app" class="flex flex-col items-center text-[#58CC02]">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -102,34 +102,6 @@
                 </svg>
                 <span class="text-xs">Home</span>
             </button>
-            <!-- <button class="flex flex-col items-center text-gray-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15.536 8.464a5 5 0 010 7.072M12 18.364a9 9 0 010-12.728M18.364 5.636a9 9 0 010 12.728" />
-                </svg>
-                <span class="text-xs">Audio</span>
-            </button>
-            <button class="flex flex-col items-center text-gray-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
-                </svg>
-                <span class="text-xs">Practice</span>
-            </button>
-            <button class="flex flex-col items-center text-gray-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <span class="text-xs">Quest</span>
-            </button>
-            <button class="flex flex-col items-center text-gray-400">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-                <span class="text-xs">Shop</span>
-            </button> -->
         </div>
     </div>
 </div>
