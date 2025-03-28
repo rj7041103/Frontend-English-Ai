@@ -109,6 +109,6 @@ export class HomeComponent {
       setTimeout(() => slides[current].classList.remove('prev'), 10);
     };
 
-    setInterval(nextSlide, 2000);
+    setInterval(nextSlide, 4000);
   }
 }

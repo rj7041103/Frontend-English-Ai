@@ -1,7 +1,7 @@
-<div id="container" class="from-slate-900 via-indigo-900 to-purple-900 min-h-screen flex items-center justify-center">
+<div id="container" class="bg-gray-100 from-slate-900 min-h-screen flex items-center justify-center">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
         <div class="bg-white rounded-2xl shadow-2xl border border-white/20 p-8">
-            <h1 class="text-5xl font-bold text-center text-gray-900 mb-2 glow-text animate__animated animate__fadeIn">
+            <h1 class="text-4xl font-bold text-center text-gray-900 mb-2 glow-text animate__animated animate__fadeIn">
                 Word Builder Challenge
             </h1>
 
@@ -61,11 +61,21 @@
                 </button>
             </div>
 
-            <div #feedback id="feedback"
-                class="mt-6 text-center text-white text-xl flex items-center justify-center h-12">
-                <!-- Feedback messages will appear here -->
+            <div #feedback id="feedback" class="text-center text-white text-xl flex items-center justify-center ">
             </div>
         </div>
     </div>
 
+    <!-- Navigation bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-1">
+        <div class="flex justify-around items-center max-w-xl mx-auto">
+            <button (click)="navigateToHome()" class="flex flex-col items-center text-[#58CC02]">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                </svg>
+                <span class="text-xs">Home</span>
+            </button>
+        </div>
+    </div>
 </div>

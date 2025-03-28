@@ -11,13 +11,14 @@ import { IaService } from '../../shared/ia/ia.service';
 import { Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import gsap from 'gsap';
 import Typed from 'typed.js';
 import { AppStore } from '../../store/store';
 
 @Component({
   selector: 'app-ia',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './ia.component.html',
   styleUrls: ['./ia.component.css'], // Corregido a styleUrls
 })
