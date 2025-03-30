@@ -55,7 +55,7 @@
                         @if(canActive2() == false && canActive3() == false){
                         <!-- Nivel 1 -->
                         <button data-level="1" [routerLink]="['/wordArrange']"
-                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[10%] left-1/2 -translate-x-1/2">
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10  top-[10%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">1</div>
                                 <div class="text-sm">Ordenar</div>
@@ -69,8 +69,8 @@
                             </div>
                         </button>
                         <!-- Nivel 2 -->
-                        <button data-level="2" [routerLink]="['/practices']"
-                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[40%] left-1/2 -translate-x-1/2"
+                        <button data-level="2"
+                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10  top-[40%] left-1/2 -translate-x-1/2"
                             disabled>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">2</div>
@@ -79,8 +79,8 @@
                         </button>
 
                         <!-- Nivel 3 -->
-                        <button data-level="3" [routerLink]="['/session']"
-                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[70%] left-1/2 -translate-x-1/2"
+                        <button data-level="3"
+                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10  top-[70%] left-1/2 -translate-x-1/2"
                             disabled>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">3</div>
@@ -94,7 +94,7 @@
                         @if(canActive2()){
                         <!-- Nivel 1 -->
                         <button data-level="1" [routerLink]="['/wordArrange']"
-                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[10%] left-1/2 -translate-x-1/2">
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10  top-[10%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">1</div>
                                 <div class="text-sm">Ordenar</div>
@@ -109,16 +109,22 @@
                         </button>
                         <!-- Nivel 2 -->
                         <button data-level="2" [routerLink]="['/practices']"
-                            class="level-btn  bg-[#FFC800] hover:bg-[#FFD700]  text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[40%] left-1/2 -translate-x-1/2"
-                            disabled>
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10  top-[40%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">2</div>
                                 <div class="text-sm">Lecciones</div>
                             </div>
+                            <div class="absolute -top-2 -right-2 bg-green-500 rounded-full p-2 hidden completed-check">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
                         </button>
                         <!-- Nivel 3 -->
-                        <button data-level="3" [routerLink]="['/session']"
-                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 absolute top-[70%] left-1/2 -translate-x-1/2"
+                        <button data-level="3"
+                            class="level-btn bg-gray-300 text-white font-bold w-24 h-24 rounded-full shadow-lg transform transition-all flex items-center justify-center relative z-10 top-[70%] left-1/2 -translate-x-1/2"
                             disabled>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">3</div>
@@ -130,7 +136,7 @@
                         @if(canActive3()){
                         <!-- Nivel 1 -->
                         <button data-level="1" [routerLink]="['/wordArrange']"
-                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[10%] left-1/2 -translate-x-1/2">
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10  top-[10%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">1</div>
                                 <div class="text-sm">Ordenar</div>
@@ -145,22 +151,36 @@
                         </button>
                         <!-- Nivel 2 -->
                         <button data-level="2" [routerLink]="['/practices']"
-                            class="level-btn  bg-[#FFC800] hover:bg-[#FFD700]  text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[40%] left-1/2 -translate-x-1/2"
-                            disabled>
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10  top-[40%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">2</div>
                                 <div class="text-sm">Lecciones</div>
                             </div>
+                            <div class="absolute -top-2 -right-2 bg-green-500 rounded-full p-2 hidden completed-check">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
                         </button>
+
                         <!-- Nivel 3 -->
                         <button data-level="3" [routerLink]="['/session']"
-                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10 absolute top-[70%] left-1/2 -translate-x-1/2"
-                            disabled>
+                            class="level-btn bg-[#FFC800] hover:bg-[#FFD700] text-white font-bold w-24 h-24 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center relative z-10  top-[70%] left-1/2 -translate-x-1/2">
                             <div class="text-center">
                                 <div class="text-2xl font-bold">3</div>
                                 <div class="text-sm">Conversar</div>
                             </div>
+                            <div class="absolute -top-2 -right-2 bg-green-500 rounded-full p-2 hidden completed-check">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
                         </button>
+
                         }
                     </div>
                 </div>

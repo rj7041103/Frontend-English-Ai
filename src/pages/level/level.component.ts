@@ -1,6 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppStore } from '../../store/store';
 
 @Component({
   selector: 'app-level',
@@ -21,7 +20,6 @@ export class LevelComponent {
   }
   ngAfterViewInit() {
     this.currentLevel = localStorage.getItem('currentTaskLevel');
-    console.log('hola');
     if (this.currentLevel != null && this.currentLevel == '2') {
       this.canActive2.set(true);
       console.log('2: ', this.canActive2());
