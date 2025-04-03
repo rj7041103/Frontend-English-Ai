@@ -1,5 +1,5 @@
 <!-- Grid de Cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
     @for(item of itemBentoArray; track item.name){
     @if(unlockedLevels.includes(item.english_level) || item.english_level == ''){
     <a [routerLink]="[item.direction]" class="transform hover:scale-105 transition duration-300">
@@ -23,6 +23,35 @@
         </div>
     </a>
     }
+    }
+</div>
 
+<!-- Otro div -->
+<br><br>
+<h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Practices 💪</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+    @for(item of itemPractices; track item.name){
+    @if(unlockedLevels.includes(item.english_level) || item.english_level == ''){
+    <a [routerLink]="[item.direction]" class="transform hover:scale-105 transition duration-300">
+        <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl cursor-pointer">
+            <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                <fa-icon [icon]="faComments" class=" text-2xl"></fa-icon>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">{{item.name}}</h2>
+            <p class="text-gray-600">{{item.description}}</p>
+        </div>
+    </a>
+    }
+    @else{
+    <a class="transform  transition ">
+        <div class="bg-gray-400 rounded-xl shadow-lg p-6 hover:shadow-xl ">
+            <div class="flex items-center justify-center w-14 h-14 bg-indigo-100 rounded-full mb-4">
+                <fa-icon [icon]="faComments" class=" text-2xl"></fa-icon>
+            </div>
+            <h2 class="text-xl font-semibold text-zinc-50 mb-2">{{item.name}}</h2>
+            <p class="text-zinc-100">{{item.description}}</p>
+        </div>
+    </a>
+    }
     }
 </div>

@@ -26,12 +26,6 @@ export class ItemBentoComponent {
       direction: '/level',
     },
     {
-      name: 'Praticas AI 🤖💬',
-      english_level: '',
-      description: 'Habla con la IA y mejora tu inglés',
-      direction: '/session',
-    },
-    {
       name: 'Level B1 🔤📔',
       english_level: 'B1',
       description: 'Domina el tercer nivel y mejora tu inglés',
@@ -43,11 +37,20 @@ export class ItemBentoComponent {
       description: 'Llega al cuarto nivel y destaca',
       direction: '/level',
     },
+  ];
+
+  itemPractices = [
+    {
+      name: 'Practices AI 🤖💬',
+      english_level: '',
+      description: 'Habla con la IA y mejora tu inglés',
+      direction: '/session',
+    },
     {
       name: 'Chat 📝💭',
       english_level: '',
       description: 'Chat de Comunidad',
       direction: '/chat',
     },
-  ];
+  ]
 }
