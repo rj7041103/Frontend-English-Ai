@@ -26,29 +26,28 @@ export class ItemBentoComponent {
       direction: '/level',
     },
     {
-      name: 'Level B1 🔤📔',
-      english_level: 'B1',
-      description: 'Domina el tercer nivel y mejora tu inglés',
-      direction: '/level',
-    },
-    {
       name: 'Praticas AI 🤖💬',
       english_level: '',
       description: 'Habla con la IA y mejora tu inglés',
       direction: '/session',
     },
     {
-      name: 'Chat 📝💭',
-      english_level: '',
-      description: 'Chat de Comunidad',
-      direction: '/chat',
+      name: 'Level B1 🔤📔',
+      english_level: 'B1',
+      description: 'Domina el tercer nivel y mejora tu inglés',
+      direction: '/level',
     },
-
     {
       name: 'Level B2 🏆📊',
       english_level: 'B2',
       description: 'Llega al cuarto nivel y destaca',
       direction: '/level',
+    },
+    {
+      name: 'Chat 📝💭',
+      english_level: '',
+      description: 'Chat de Comunidad',
+      direction: '/chat',
     },
   ];
 }
